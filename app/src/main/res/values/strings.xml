@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">UniFind</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_map_unifind">Info GPS</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="option1">Opção 1</string>
+    <string name="option2">Opção 2</string>
+    <string name="option3">Opção 3</string>
+    <string name="option4">Opção 4</string>
+</resources>
