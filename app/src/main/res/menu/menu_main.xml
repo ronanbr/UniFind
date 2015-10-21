@@ -1,8 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_map_unifind" android:title="@string/action_map_unifind"
-        android:orderInCategory="100" app:showAsAction="never" />
+
 
     <item android:id="@+id/option1" android:title="@string/option1"
         android:orderInCategory="100" app:showAsAction="never" />
@@ -10,6 +9,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/option3" android:title="@string/option3"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/option4" android:title="@string/option4"
+    <item android:id="@+id/action_map_unifind" android:title="@string/action_map_unifind"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

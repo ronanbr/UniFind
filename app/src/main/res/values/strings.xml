@@ -5,8 +5,7 @@
     <string name="action_map_unifind">Info GPS</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="option1">Opção 1</string>
-    <string name="option2">Opção 2</string>
-    <string name="option3">Opção 3</string>
-    <string name="option4">Opção 4</string>
+    <string name="option1">Buscar Bloco</string>
+    <string name="option2">Buscar Serviço</string>
+    <string name="option3">Buscar Sala</string>
 </resources>
