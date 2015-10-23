@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 startMapsActivity();
                 return true;
 
+            case R.id.option3:
+                startBuscaActivity();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -68,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         Intent mapsActivity = new Intent(this, MapsActivity.class);
         startActivity(mapsActivity);
+    }
+
+    public void startBuscaActivity() {
+
+        Intent buscaSala = new Intent(this, BuscaSala.class);
+        startActivity(buscaSala);
     }
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
