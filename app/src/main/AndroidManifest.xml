@@ -39,13 +39,17 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAN96zDlaj2L5qEmxbcRLfB4WsUY3HAuKE" />
+            android:value="AIzaSyAtUFQQEl06ZrtoT-qKchZtdJHyaf1_wVE" />
 
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity android:name=".BuscaSala" >
+        </activity>
+        <activity android:name=".BuscaServico" >
+        </activity>
+        <activity android:name=".BuscaBloco" >
         </activity>
     </application>
 
