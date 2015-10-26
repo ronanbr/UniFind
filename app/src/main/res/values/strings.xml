@@ -8,4 +8,7 @@
     <string name="option1">Buscar Bloco</string>
     <string name="option2">Buscar Serviço</string>
     <string name="option3">Buscar Sala</string>
+    <string name="String">Campus:</string>
+    <string name="title_activity_busca_bloco">BuscaBloco</string>
+    <string name="action_settings">Settings</string>
 </resources>

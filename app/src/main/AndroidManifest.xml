@@ -39,7 +39,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAtUFQQEl06ZrtoT-qKchZtdJHyaf1_wVE" />
+            android:value="AIzaSyAN96zDlaj2L5qEmxbcRLfB4WsUY3HAuKE" />
 
         <activity
             android:name=".MapsActivity"
@@ -49,7 +49,9 @@
         </activity>
         <activity android:name=".BuscaServico" >
         </activity>
-        <activity android:name=".BuscaBloco" >
+        <activity
+            android:name=".BuscaBloco"
+            android:label="@string/title_activity_busca_bloco" >
         </activity>
     </application>
 

@@ -3,6 +3,7 @@ package br.unisul.unifind;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,8 +59,16 @@ public class MainActivity extends AppCompatActivity {
                 startMapsActivity();
                 return true;
 
+            case R.id.option1:
+                startBuscaBlocoActivity();
+                return true;
+
+            case R.id.option2:
+                startBuscaServicoActivity();
+                return true;
+
             case R.id.option3:
-                startBuscaActivity();
+                startBuscaSalaActivity();
                 return true;
 
             default:
@@ -74,11 +83,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(mapsActivity);
     }
 
-    public void startBuscaActivity() {
+    public void startBuscaSalaActivity() {
 
         Intent buscaSala = new Intent(this, BuscaSala.class);
         startActivity(buscaSala);
     }
+
+
+    public void startBuscaBlocoActivity() {
+
+        Intent buscaBloco = new Intent(this, BuscaBloco.class);
+        startActivity(buscaBloco);
+    }
+
+    public void startBuscaServicoActivity() {
+
+        Intent buscaServico = new Intent(this, BuscaServico.class);
+        startActivity(buscaServico);
+    }
+
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
     public void startGPS(){
@@ -124,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         mMap.addMarker(new MarkerOptions().position(new LatLng(-28.482543, -49.019273)).title("Bloco Sede"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
     }
 

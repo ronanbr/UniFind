@@ -77,7 +77,7 @@ public class MapsActivity extends FragmentActivity {
     public void updateView(Location locat){
         Double latitude = locat.getLatitude();
         Double longitude = locat.getLongitude();
-        Double velocidade = locat.getSpeed()*1.61;
+        Double velocidade = Double.valueOf(locat.getSpeed());
         Double altitude = locat.getAltitude();
 
 
