@@ -71,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 startBuscaSalaActivity();
                 return true;
 
+            case R.id.exit:
+                finalizar();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -149,6 +153,13 @@ public class MainActivity extends AppCompatActivity {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
+    }
+
+    private void finalizar(){
+        Intent intentSair = new Intent(Intent.ACTION_MAIN);
+        intentSair.addCategory(Intent.CATEGORY_HOME);
+        intentSair.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intentSair);
     }
 
 }
