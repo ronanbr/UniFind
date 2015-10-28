@@ -132,14 +132,15 @@
             android:id="@+id/txtDescricao"
             android:editable="true"
             android:focusable="true"
-            android:focusableInTouchMode="false"
+            android:focusableInTouchMode="true"
             android:layout_below="@+id/textView8"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/edVelocidade"
-            android:layout_alignEnd="@+id/edVelocidade"
+            android:layout_alignEnd="@+id/txtDescricao"
             android:hint="Descrição do Bloco"
-            android:enabled="true" />
+            android:enabled="true"
+            android:clickable="true" />
 
         <Button
             style="?android:attr/buttonStyleSmall"

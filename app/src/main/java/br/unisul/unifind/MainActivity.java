@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         for (Bloco bloco : blocos) {
             Log.i("LocaisNoBd", bloco.toString());
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

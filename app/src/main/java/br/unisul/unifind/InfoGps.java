@@ -86,13 +86,18 @@ public class InfoGps extends FragmentActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if((edLatitude.getText().toString().length()>3) && (edDescricao.getText().toString().length()>3) && (edLongitude.getText().toString().length()>3)){
         Bloco bloco = new Bloco();
         bloco.setId(0);
         bloco.setDescricao(edDescricao.getText().toString());
         bloco.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
         bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
         DbHelper dbh = new DbHelper(this);
-        dbh.insertBloco(bloco);
-        edDescricao.setText("");
+
+            dbh.insertBloco(bloco);
+            edDescricao.setText("");
+            finish();
+        }
+
     }
 }

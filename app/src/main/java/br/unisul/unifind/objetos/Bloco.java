@@ -53,6 +53,6 @@ public class Bloco {
 
     @Override
     public String toString() {
-        return descricao;
+        return descricao+" ("+latitude+", "+longitude+")";
     }
 }

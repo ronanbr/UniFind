@@ -18,7 +18,7 @@ import br.unisul.unifind.objetos.Sala;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 8;
+    private static final int VERSAO_BASE = 10;
 
     public DbHelper(Context context) {
 
