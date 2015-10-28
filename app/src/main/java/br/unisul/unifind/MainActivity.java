@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         startGPS();
 
         adicionarBlocosNoBD();
-        List<Bloco> blocos = dbHelper.selectBlocos();
-        for (Bloco bloco : blocos) {
-            Log.i("LocaisNoBd", bloco.toString());
-        }
+//        List<Bloco> blocos = dbHelper.selectBlocos();
+//        for (Bloco bloco : blocos) {
+//            Log.i("LocaisNoBd", bloco.toString());
+//        }
 
     }
 
@@ -157,15 +157,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpMap() {
-        LatLng location = new LatLng(-28.479075, -49.022547);
+        LatLng campusTB = new LatLng(-28.479075, -49.022547);
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-28.475490, -49.026258)).title("Cettal"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-28.480209, -49.021578)).title("Saúde"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-28.480684, -49.021079)).title("Shopping Unisul"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-28.480798, -49.020101)).title("Ginásio"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-28.482543, -49.019273)).title("Bloco Sede"));
+        List<Bloco> blocos = dbHelper.selectBlocos();
+        for (Bloco bloco : blocos) {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(bloco.getLatitude(), bloco.getLongitude())).title(bloco.getDescricao()));
+        }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusTB, 16));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
     }
