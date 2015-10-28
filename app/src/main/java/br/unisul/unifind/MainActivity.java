@@ -1,25 +1,16 @@
 package br.unisul.unifind;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,10 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Iterator;
 import java.util.List;
 
 import br.unisul.unifind.objetos.Bloco;
+import br.unisul.unifind.viewsDB.DbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,14 +34,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //adicionarBlocosNoBD();
+
         setUpMapIfNeeded();
         startGPS();
 
-        adicionarBlocosNoBD();
-//        List<Bloco> blocos = dbHelper.selectBlocos();
-//        for (Bloco bloco : blocos) {
-//            Log.i("LocaisNoBd", bloco.toString());
-//        }
+        List<Bloco> blocos = dbHelper.selectBlocos();
+        for (Bloco bloco : blocos) {
+            Log.i("LocaisNoBd", bloco.toString());
+        }
 
     }
 
@@ -84,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.option3:
                 startBuscaSalaActivity();
+                return true;
+
+            case R.id.option5:
+                Intent blocosBD = new Intent(this, BlocosCadastrados.class);
+                startActivity(blocosBD);
                 return true;
 
             case R.id.exit:
@@ -169,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void adicionarBlocosNoBD(){
+    private void adicionarBlocosNoBD() {
         dbHelper.insertBloco(new Bloco(0, "Laboratorios de Informatica", -28.475490, -49.026258));
         dbHelper.insertBloco(new Bloco(0, "Saúde", -28.480209, -49.021578));
         dbHelper.insertBloco(new Bloco(0, "Shopping Unisul", -28.480684, -49.021079));
@@ -178,10 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void finalizar(){
-        Intent intentSair = new Intent(Intent.ACTION_MAIN);
-        intentSair.addCategory(Intent.CATEGORY_HOME);
-        intentSair.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intentSair);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 }

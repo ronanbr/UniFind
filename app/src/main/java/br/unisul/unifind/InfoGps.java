@@ -1,15 +1,20 @@
 package br.unisul.unifind;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class InfoGps extends FragmentActivity {
+import br.unisul.unifind.objetos.Bloco;
+import br.unisul.unifind.viewsDB.DbHelper;
+
+public class InfoGps extends FragmentActivity implements View.OnClickListener {
 
 //    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //variáveis que usaremos durante o processo
@@ -17,7 +22,8 @@ public class InfoGps extends FragmentActivity {
     private EditText edLongitude;
     private EditText edAltitude;
     private EditText edVelocidade;
-    private Button btLocalizar;
+    private EditText edDescricao;
+    private Button btSalvar;
 
 
 
@@ -43,6 +49,9 @@ public class InfoGps extends FragmentActivity {
         edLongitude = (EditText) findViewById(R.id.edLongitude);
         edAltitude = (EditText) findViewById(R.id.edAltitude);
         edVelocidade = (EditText) findViewById(R.id.edVelocidade);
+        edDescricao = (EditText) findViewById(R.id.txtDescricao);
+        btSalvar = (Button) findViewById(R.id.addBloco);
+        btSalvar.setOnClickListener(this);
 
 
     }
@@ -73,6 +82,17 @@ public class InfoGps extends FragmentActivity {
         edLongitude.setText(longitude.toString());
         edVelocidade.setText(velocidade.toString());
         edAltitude.setText(altitude.toString());
+    }
 
+    @Override
+    public void onClick(View v) {
+        Bloco bloco = new Bloco();
+        bloco.setId(0);
+        bloco.setDescricao(edDescricao.getText().toString());
+        bloco.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
+        bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
+        DbHelper dbh = new DbHelper(this);
+        dbh.insertBloco(bloco);
+        edDescricao.setText("");
     }
 }

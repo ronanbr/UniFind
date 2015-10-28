@@ -45,16 +45,21 @@
             android:name=".InfoGps"
             android:label="@string/title_activity_maps" >
         </activity>
-        <activity android:name=".BuscaSala"
-            android:label="Busca de Sala" >>
+        <activity
+            android:name=".BuscaSala"
+            android:label="Busca de Sala" >
+>
         </activity>
-        <activity android:name=".BuscaServico"
-            android:label="Busca de Serviço" >>
-
+        <activity
+            android:name=".BuscaServico"
+            android:label="Busca de Serviço" >
+>
         </activity>
         <activity
             android:name=".BuscaBloco"
             android:label="Busca de Bloco" >
+        </activity>
+        <activity android:name=".BlocosCadastrados" >
         </activity>
     </application>
 
