@@ -42,7 +42,7 @@
             android:value="AIzaSyAN96zDlaj2L5qEmxbcRLfB4WsUY3HAuKE" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".InfoGps"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity android:name=".BuscaSala"

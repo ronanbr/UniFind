@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">UniFind</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_map_unifind">Info GPS</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Info GPS</string>
 
     <string name="option1">Buscar Bloco</string>
     <string name="option2">Buscar Serviço</string>
     <string name="option3">Buscar Sala</string>
+    <string name="option4">Info GPS</string>
     <string name="exit">Sair</string>
 
 

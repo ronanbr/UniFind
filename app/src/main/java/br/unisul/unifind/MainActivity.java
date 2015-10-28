@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +27,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Iterator;
+import java.util.List;
+
+import br.unisul.unifind.objetos.Bloco;
+
 public class MainActivity extends AppCompatActivity {
 
+    DbHelper dbHelper = new DbHelper(this);
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
 
@@ -35,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setUpMapIfNeeded();
         startGPS();
+
+        adicionarBlocosNoBD();
+        List<Bloco> blocos = dbHelper.selectBlocos();
+        for (Bloco bloco : blocos) {
+            Log.i("LocaisNoBd", bloco.toString());
+        }
+
     }
 
     @Override
@@ -55,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_map_unifind:
-                startMapsActivity();
+            case R.id.option4:
+                startInfoGpsctivity();
                 return true;
 
             case R.id.option1:
@@ -81,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startMapsActivity() {
+    public void startInfoGpsctivity() {
 
-        Intent mapsActivity = new Intent(this, MapsActivity.class);
-        startActivity(mapsActivity);
+        Intent infoGpsActivity = new Intent(this, InfoGps.class);
+        startActivity(infoGpsActivity);
     }
 
     public void startBuscaSalaActivity() {
@@ -153,6 +168,14 @@ public class MainActivity extends AppCompatActivity {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
+    }
+
+    private void adicionarBlocosNoBD(){
+        dbHelper.insertBloco(new Bloco(0, "Laboratorios de Informatica", -28.475490, -49.026258));
+        dbHelper.insertBloco(new Bloco(0, "Saúde", -28.480209, -49.021578));
+        dbHelper.insertBloco(new Bloco(0, "Shopping Unisul", -28.480684, -49.021079));
+        dbHelper.insertBloco(new Bloco(0, "Ginásio", -28.480798, -49.020101));
+        dbHelper.insertBloco(new Bloco(0, "Bloco Sede", -28.482543, -49.019273));
     }
 
     private void finalizar(){

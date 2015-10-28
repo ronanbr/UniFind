@@ -6,20 +6,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+public class InfoGps extends FragmentActivity {
 
-public class MapsActivity extends FragmentActivity {
-
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+//    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //variáveis que usaremos durante o processo
     private EditText edLatitude;
     private EditText edLongitude;
@@ -32,8 +24,9 @@ public class MapsActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_info_gps);
         setupElements();
+
         startGPS();
     }
 
@@ -50,13 +43,8 @@ public class MapsActivity extends FragmentActivity {
         edLongitude = (EditText) findViewById(R.id.edLongitude);
         edAltitude = (EditText) findViewById(R.id.edAltitude);
         edVelocidade = (EditText) findViewById(R.id.edVelocidade);
-//
-//        btLocalizar = (Button) findViewById(R.id.btLocalizar);
-//        btLocalizar.setOnClickListener(new Button.OnClickListener() {
-//            public void onClick(View v) {
-//                startGPS();
-//            }
-//        });
+
+
     }
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
@@ -77,7 +65,7 @@ public class MapsActivity extends FragmentActivity {
     public void updateView(Location locat){
         Double latitude = locat.getLatitude();
         Double longitude = locat.getLongitude();
-        Double velocidade = Double.valueOf(locat.getSpeed());
+        Double velocidade = (double) locat.getSpeed();
         Double altitude = locat.getAltitude();
 
 
@@ -86,9 +74,5 @@ public class MapsActivity extends FragmentActivity {
         edVelocidade.setText(velocidade.toString());
         edAltitude.setText(altitude.toString());
 
-
-
-
     }
-
 }

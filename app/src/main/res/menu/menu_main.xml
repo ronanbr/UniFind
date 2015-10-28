@@ -9,7 +9,7 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/option3" android:title="@string/option3"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_map_unifind" android:title="@string/action_map_unifind"
+    <item android:id="@+id/option4" android:title="@string/option4"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/exit" android:title="@string/exit"
         android:orderInCategory="100" app:showAsAction="never" />
