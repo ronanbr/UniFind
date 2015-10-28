@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtDescricao"
             android:editable="true"
-            android:focusable="false"
+            android:focusable="true"
             android:focusableInTouchMode="false"
             android:layout_below="@+id/textView8"
             android:layout_alignParentLeft="true"
