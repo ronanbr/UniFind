@@ -18,7 +18,7 @@ import br.unisul.unifind.objetos.Sala;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 10;
+    private static final int VERSAO_BASE = 19;
 
     public DbHelper(Context context) {
 
@@ -58,9 +58,16 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateTabelaBlocos);
         db.execSQL(sqlCreateTabelaSalas);
         db.execSQL(sqlCreateTabelaServicos);
+
+//        onCreateAdd(db, new Bloco(0, "Labs de Informática", -28.475490, -49.026258));
+//        onCreateAdd(db, new Bloco(0, "Saúde", -28.480209, -49.021578));
+//        onCreateAdd(db, new Bloco(0, "Shopping Unisul", -28.480684, -49.021079));
+//        onCreateAdd(db, new Bloco(0, "Ginásio", -28.480798, -49.020101));
+//        onCreateAdd(db, new Bloco(0, "Bloco Sede", -28.482543, -49.019273));
     }
 
-    @Override
+
+   @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //drop tables
@@ -105,8 +112,8 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put("descricao", sala.getDescricao());
-        cv.put("latitude", sala.getDescricao());
-        cv.put("longitude", sala.getDescricao());
+        cv.put("latitude", sala.getLatitude());
+        cv.put("longitude", sala.getLongitude());
 
         db.insert("salas", null, cv);
 
@@ -136,4 +143,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return blocos;
     }
+
+
+    public void onCreateAdd(SQLiteDatabase db, Bloco bloco){
+        ContentValues cv = new ContentValues();
+
+        cv.put("descricao", bloco.getDescricao());
+        cv.put("latitude", bloco.getLatitude());
+        cv.put("longitude", bloco.getLongitude());
+
+        db.insert("blocos", null, cv);
+    }
+
 }

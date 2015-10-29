@@ -169,14 +169,14 @@ public class MainActivity extends AppCompatActivity {
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
     }
-
-    private void adicionarBlocosNoBD() {
-        dbHelper.insertBloco(new Bloco(0, "Laboratorios de Informatica", -28.475490, -49.026258));
-        dbHelper.insertBloco(new Bloco(0, "Saúde", -28.480209, -49.021578));
-        dbHelper.insertBloco(new Bloco(0, "Shopping Unisul", -28.480684, -49.021079));
-        dbHelper.insertBloco(new Bloco(0, "Ginásio", -28.480798, -49.020101));
-        dbHelper.insertBloco(new Bloco(0, "Bloco Sede", -28.482543, -49.019273));
-    }
+//
+//    private void adicionarBlocosNoBD() {
+//        dbHelper.insertBloco(new Bloco(0, "Laboratorios de Informatica", -28.475490, -49.026258));
+//        dbHelper.insertBloco(new Bloco(0, "Saúde", -28.480209, -49.021578));
+//        dbHelper.insertBloco(new Bloco(0, "Shopping Unisul", -28.480684, -49.021079));
+//        dbHelper.insertBloco(new Bloco(0, "Ginásio", -28.480798, -49.020101));
+//        dbHelper.insertBloco(new Bloco(0, "Bloco Sede", -28.482543, -49.019273));
+//    }
 
     private void finalizar(){
         android.os.Process.killProcess(android.os.Process.myPid());

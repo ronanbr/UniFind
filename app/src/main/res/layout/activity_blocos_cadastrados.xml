@@ -14,5 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:choiceMode="none" />
+        android:choiceMode="none"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

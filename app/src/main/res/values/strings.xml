@@ -5,8 +5,8 @@
     <string name="option1">Buscar Bloco</string>
     <string name="option2">Buscar Serviço</string>
     <string name="option3">Buscar Sala</string>
-    <string name="option4">Info GPS</string>
-    <string name="option5">Blocos Cadastrados</string>
+    <string name="option4">Cadastrar Local</string>
+    <string name="option5">Locais Cadastrados</string>
     <string name="exit">Sair</string>
 
 

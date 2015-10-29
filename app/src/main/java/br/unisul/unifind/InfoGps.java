@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +15,7 @@ import android.widget.EditText;
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.viewsDB.DbHelper;
 
-public class InfoGps extends FragmentActivity implements View.OnClickListener {
+public class InfoGps extends AppCompatActivity implements View.OnClickListener {
 
 //    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //variáveis que usaremos durante o processo
