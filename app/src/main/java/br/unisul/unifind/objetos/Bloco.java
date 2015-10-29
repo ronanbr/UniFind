@@ -50,5 +50,5 @@ public class Bloco {
         this.longitude = longitude;
     }
     @Override
-    public String toString() { return descricao+" ("+latitude+", "+longitude+")"; }
+    public String toString() { return descricao; }//+" ("+latitude+", "+longitude+")"; }
 }

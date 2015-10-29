@@ -32,7 +32,7 @@ public class BlocosCadastrados extends AppCompatActivity{
         super.onResume();
 
         DbHelper dbHelper = new DbHelper(this);
-        List<Bloco> blocos = dbHelper.selectBlocos();
+        List<Bloco> blocos = dbHelper.selectTodosBlocos();
         ArrayAdapter<Bloco> adp = new ArrayAdapter<Bloco>(this, android.R.layout.simple_list_item_1, blocos);
         listView.setAdapter(adp);
     }

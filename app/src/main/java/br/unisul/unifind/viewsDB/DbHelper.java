@@ -82,6 +82,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
+    public void onCreateAdd(String table, SQLiteDatabase db, String descricao, Double lat, Double lon){
+        ContentValues cv = new ContentValues();
+
+        cv.put("descricao", descricao);
+        cv.put("latitude", lat);
+        cv.put("longitude", lon);
+
+        db.insert(table, null, cv);
+    }
+
     public void insertCampi(Campus campus){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -122,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List selectBlocos(){
+    public List selectTodosBlocos(){
         List<Bloco> blocos = new ArrayList<Bloco>();
 
         SQLiteDatabase db = getReadableDatabase();
@@ -146,15 +156,27 @@ public class DbHelper extends SQLiteOpenHelper {
         return blocos;
     }
 
+    public List selectBlocos(String filtro){
+        List<Bloco> blocos = new ArrayList<Bloco>();
 
-    public void onCreateAdd(String table, SQLiteDatabase db, String descricao, Double lat, Double lon){
-        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = getReadableDatabase();
 
-        cv.put("descricao", descricao);
-        cv.put("latitude", lat);
-        cv.put("longitude", lon);
+        String sqlSelect = "SELECT * FROM blocos " +
+                "WHERE descricao LIKE '%"+filtro+"%'";
 
-        db.insert(table, null, cv);
+        Cursor c = db.rawQuery(sqlSelect, null);
+        if (c.moveToFirst()){
+            do{
+                Bloco bloco = new Bloco();
+                bloco.setId(c.getInt(0));
+                bloco.setDescricao(c.getString(1));
+                bloco.setLatitude(c.getDouble(2));
+                bloco.setLongitude(c.getDouble(3));
+
+                blocos.add(bloco);
+            }while(c.moveToNext());
+        }
+
+        return blocos;
     }
-
 }

@@ -28,7 +28,7 @@
             android:editable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:hint="Aguarde.."/>
+            android:hint="Obtendo.."/>
 
         <EditText
             android:id="@+id/edLatitude"
@@ -44,7 +44,7 @@
             android:layout_alignParentStart="true"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:hint="Aguarde.."/>
+            android:hint="Obtendo.."/>
 
         <TextView
             android:id="@+id/textView"

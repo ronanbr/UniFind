@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Para acompanhamento de dados:
         //Imprime no log os dados da tabela Blocos
-        List<Bloco> blocos = dbHelper.selectBlocos();
+        List<Bloco> blocos = dbHelper.selectTodosBlocos();
         for (Bloco bloco : blocos) {
-            Log.i("LocaisNoBd", bloco.toString());
+            Log.i("teste", "Local no BD (Bloco): "+bloco.toString());
         }
     }
 
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpMap() {
-        List<Bloco> blocos = dbHelper.selectBlocos();
+        List<Bloco> blocos = dbHelper.selectTodosBlocos();
         for (Bloco bloco : blocos) {
             mMap.addMarker(new MarkerOptions().position(new LatLng(bloco.getLatitude(), bloco.getLongitude())).title(bloco.getDescricao()));
         }

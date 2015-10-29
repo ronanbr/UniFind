@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.viewsDB.DbHelper;
@@ -89,6 +90,7 @@ public class InfoGps extends AppCompatActivity implements View.OnClickListener {
 
             dbh.insertBloco(bloco);
             edDescricao.setText("");
+            Toast.makeText(InfoGps.this, "Salvo!", Toast.LENGTH_SHORT).show();
             finish();
         }
 

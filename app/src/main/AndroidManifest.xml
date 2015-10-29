@@ -59,10 +59,13 @@
             android:name=".BuscaBloco"
             android:label="Busca de Bloco" >
         </activity>
-
         <activity
             android:name=".BlocosCadastrados"
-            android:label="Locais Cadastrados">
+            android:label="Locais Cadastrados" >
+        </activity>
+        <activity
+            android:name=".ResultadoBusca"
+            android:label="Locais Encontrados">
         </activity>
     </application>
 
