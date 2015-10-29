@@ -92,6 +92,8 @@ public class InfoGps extends AppCompatActivity implements View.OnClickListener {
             edDescricao.setText("");
             Toast.makeText(InfoGps.this, "Salvo!", Toast.LENGTH_SHORT).show();
             finish();
+        }else{
+            Toast.makeText(InfoGps.this, "Sem localização definida ou descrição inválida!", Toast.LENGTH_SHORT).show();
         }
 
     }
