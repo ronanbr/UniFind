@@ -17,44 +17,37 @@ import br.unisul.unifind.viewsDB.DbHelper;
 
 public class InfoGps extends AppCompatActivity implements View.OnClickListener {
 
-//    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    //variáveis que usaremos durante o processo
     private EditText edLatitude;
     private EditText edLongitude;
-    private EditText edAltitude;
-    private EditText edVelocidade;
     private EditText edDescricao;
     private Button btSalvar;
 
-
+//    private EditText edAltitude;
+//    private EditText edVelocidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_gps);
-        setupElements();
 
-        startGPS();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        setContentView(R.layout.activity_info_gps);
+        setupElements();
+        startGPS();
     }
 
-    // Método usado para importar os elementos da classe R
-
+    // Método usado para importar os elementos da classe R (layout por id)
     public void setupElements() {
         edLatitude = (EditText) findViewById(R.id.edLatitude);
         edLongitude = (EditText) findViewById(R.id.edLongitude);
-        edAltitude = (EditText) findViewById(R.id.edAltitude);
-        edVelocidade = (EditText) findViewById(R.id.edVelocidade);
+//        edAltitude = (EditText) findViewById(R.id.edAltitude);
+//        edVelocidade = (EditText) findViewById(R.id.edVelocidade);
         edDescricao = (EditText) findViewById(R.id.txtDescricao);
         btSalvar = (Button) findViewById(R.id.addBloco);
         btSalvar.setOnClickListener(this);
-
-
     }
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
@@ -75,14 +68,13 @@ public class InfoGps extends AppCompatActivity implements View.OnClickListener {
     public void updateView(Location locat){
         Double latitude = locat.getLatitude();
         Double longitude = locat.getLongitude();
-        Double velocidade = (double) locat.getSpeed();
-        Double altitude = locat.getAltitude();
-
-
         edLatitude.setText(latitude.toString());
         edLongitude.setText(longitude.toString());
-        edVelocidade.setText(velocidade.toString());
-        edAltitude.setText(altitude.toString());
+
+//        Double velocidade = (double) locat.getSpeed();
+//        Double altitude = locat.getAltitude();
+//        edVelocidade.setText(velocidade.toString());
+//        edAltitude.setText(altitude.toString());
     }
 
     @Override

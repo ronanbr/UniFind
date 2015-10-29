@@ -18,10 +18,9 @@ import br.unisul.unifind.objetos.Sala;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 19;
+    private static final int VERSAO_BASE = 21;
 
     public DbHelper(Context context) {
-
         super(context, NOME_BASE, null, VERSAO_BASE);
     }
 
@@ -59,11 +58,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateTabelaSalas);
         db.execSQL(sqlCreateTabelaServicos);
 
-//        onCreateAdd(db, new Bloco(0, "Labs de Informática", -28.475490, -49.026258));
-//        onCreateAdd(db, new Bloco(0, "Saúde", -28.480209, -49.021578));
-//        onCreateAdd(db, new Bloco(0, "Shopping Unisul", -28.480684, -49.021079));
-//        onCreateAdd(db, new Bloco(0, "Ginásio", -28.480798, -49.020101));
-//        onCreateAdd(db, new Bloco(0, "Bloco Sede", -28.482543, -49.019273));
+        onCreateAdd("blocos", db, "Cettal", -28.475490, -49.026258);
+        onCreateAdd("blocos", db, "Saúde", -28.480209, -49.021578);
+        onCreateAdd("blocos", db, "Centro de Convivência", -28.480684, -49.021079);
+        onCreateAdd("blocos", db, "Ginásio", -28.480798, -49.020101);
+        onCreateAdd("blocos", db, "Bloco Sede", -28.482543, -49.019273);
+
+        onCreateAdd("campi", db, "Tubarão", -28.479075, -49.022547);
+
     }
 
 
@@ -145,14 +147,14 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void onCreateAdd(SQLiteDatabase db, Bloco bloco){
+    public void onCreateAdd(String table, SQLiteDatabase db, String descricao, Double lat, Double lon){
         ContentValues cv = new ContentValues();
 
-        cv.put("descricao", bloco.getDescricao());
-        cv.put("latitude", bloco.getLatitude());
-        cv.put("longitude", bloco.getLongitude());
+        cv.put("descricao", descricao);
+        cv.put("latitude", lat);
+        cv.put("longitude", lon);
 
-        db.insert("blocos", null, cv);
+        db.insert(table, null, cv);
     }
 
 }

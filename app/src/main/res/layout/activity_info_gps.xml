@@ -27,7 +27,8 @@
             android:layout_alignParentStart="true"
             android:editable="false"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:hint="Aguarde.."/>
 
         <EditText
             android:id="@+id/edLatitude"
@@ -42,7 +43,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:hint="Aguarde.."/>
 
         <TextView
             android:id="@+id/textView"
@@ -64,55 +66,7 @@
             android:layout_gravity="center_vertical"
             android:layout_below="@+id/edLatitude"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Altitude:"
-            android:layout_weight="0.11"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/edLongitude"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edAltitude"
-            android:layout_below="@+id/textView3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/edLongitude"
-            android:layout_alignEnd="@+id/edLongitude"
-            android:editable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Velocidade:"
-            android:layout_weight="0.11"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/edAltitude"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edVelocidade"
-            android:layout_below="@+id/textView4"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/edAltitude"
-            android:layout_alignEnd="@+id/edAltitude"
-            android:editable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:layout_alignParentStart="true"/>
 
         <TextView
             android:id="@+id/textView8"
@@ -121,10 +75,9 @@
             android:text="Descrição:"
             android:layout_weight="0.11"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="65dp"
-            android:layout_below="@+id/edVelocidade"
+            android:layout_below="@+id/edLongitude"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -133,24 +86,24 @@
             android:editable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:hint="Descreva o Local"
+            android:enabled="true"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView8"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/edVelocidade"
-            android:layout_alignEnd="@+id/txtDescricao"
-            android:hint="Descrição do Bloco"
-            android:enabled="true"
-            android:clickable="true" />
+            android:layout_alignRight="@+id/edLongitude"
+            android:layout_alignEnd="@+id/edLongitude" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cadastrar Bloco"
+            android:text="Cadastrar Local"
             android:id="@+id/addBloco"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/txtDescricao"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentLeft="true" />
 
     </RelativeLayout>
 </RelativeLayout>

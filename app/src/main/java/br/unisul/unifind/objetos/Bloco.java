@@ -9,8 +9,7 @@ public class Bloco {
     private String descricao;
     private Double latitude, longitude;
 
-    public Bloco() {
-    }
+    public Bloco() { }
 
     public Bloco(int id, String descricao, Double latitude, Double longitude) {
         this.id = id;
@@ -50,9 +49,6 @@ public class Bloco {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
-
     @Override
-    public String toString() {
-        return descricao+" ("+latitude+", "+longitude+")";
-    }
+    public String toString() { return descricao+" ("+latitude+", "+longitude+")"; }
 }
