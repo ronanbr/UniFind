@@ -1,30 +1,20 @@
 package br.unisul.unifind.objetos;
 
 /**
- * Created by Ronan Cardoso on 28/10/2015.
+ * Created by ronan.cardoso on 30/10/2015.
  */
-public class Sala {
+public class Local {
 
-    private int id;
-    private String descricao;
-    private Double latitude, longitude;
+    String descricao;
+    Double latitude, longitude;
 
-    public Sala() {
-    }
-
-    public Sala(int id, String descricao, Double latitude, Double longitude) {
-        this.id = id;
+    public Local(String descricao, Double latitude, Double longitude) {
         this.descricao = descricao;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Local() {
     }
 
     public String getDescricao() {
@@ -49,5 +39,10 @@ public class Sala {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
     }
 }

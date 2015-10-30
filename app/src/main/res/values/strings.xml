@@ -5,10 +5,14 @@
     <string name="option1">Buscar Bloco</string>
     <string name="option2">Buscar Serviço</string>
     <string name="option3">Buscar Sala</string>
-    <string name="option4">Cadastrar Local</string>
-    <string name="option5">Locais Cadastrados</string>
+    <string name="option4">Admin</string>
     <string name="exit">Sair</string>
 
 
     <string name="String">Campus:</string>
+    <string name="title_activity_cadastro_local">CadastroLocal</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_admin">Admin</string>
 </resources>

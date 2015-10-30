@@ -68,8 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-
-   @Override
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //drop tables
@@ -92,7 +91,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(table, null, cv);
     }
 
-    public void insertCampi(Campus campus){
+    public void insertCampus(Campus campus){
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -132,6 +131,28 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public List selectTodosCampi(){
+        List<Campus> campi = new ArrayList<Campus>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sqlSelectTodosBlocos =
+                "SELECT * FROM campi";
+
+        Cursor c = db.rawQuery(sqlSelectTodosBlocos, null);
+        if (c.moveToFirst()){
+            do{
+                Campus campus = new Campus();
+                campus.setId(c.getInt(0));
+                campus.setDescricao(c.getString(1));
+
+                campi.add(campus);
+            }while(c.moveToNext());
+        }
+
+        return campi;
+    }
+
     public List selectTodosBlocos(){
         List<Bloco> blocos = new ArrayList<Bloco>();
 
@@ -155,6 +176,36 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return blocos;
     }
+
+    public List selectTodasSalas(){
+        List<Sala> salas = new ArrayList<Sala>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sqlSelectTodosBlocos =
+                "SELECT * FROM salas";
+
+        Cursor c = db.rawQuery(sqlSelectTodosBlocos, null);
+        if (c.moveToFirst()){
+            do{
+                Sala sala = new Sala();
+                sala.setId(c.getInt(0));
+                sala.setDescricao(c.getString(1));
+
+                salas.add(sala);
+            }while(c.moveToNext());
+        }
+
+        return salas;
+    }
+
+    public List selectTodosServicos(){
+        //TODO: Depois de definir os atributos de serviços, elaborar o select
+        return null;
+    }
+
+
+
 
     public List selectBlocos(String filtro){
         List<Bloco> blocos = new ArrayList<Bloco>();

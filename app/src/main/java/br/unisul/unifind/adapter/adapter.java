@@ -12,27 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.unisul.unifind.objetos.Bloco;
+import br.unisul.unifind.objetos.Local;
 
 /**
  * Created by Ronan Cardoso on 29/10/2015.
  */
 public class adapter extends BaseAdapter {
     private Context context;
-    private List<Bloco> blocos;
+    private List<Local> locais;
 
-    public adapter(Context context, List<Bloco> blocos) {
+    public adapter(Context context, List<Local> locais) {
         this.context = context;
-        this.blocos = blocos;
+        this.locais = locais;
     }
 
     @Override
     public int getCount() {
-        return blocos.size();
+        return locais.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return blocos.get(position);
+        return locais.get(position);
     }
 
     @Override
@@ -57,8 +58,8 @@ public class adapter extends BaseAdapter {
         TextView text1 = twoLineListItem.getText1();
         TextView text2 = twoLineListItem.getText2();
 
-        text1.setText(blocos.get(position).getDescricao());
-        text2.setText("(" + blocos.get(position).getLatitude()+", "+ blocos.get(position).getLongitude()+")");
+        text1.setText(locais.get(position).getDescricao());
+        text2.setText("(" + locais.get(position).getLatitude()+", "+ locais.get(position).getLongitude()+")");
 
         return twoLineListItem;
     }

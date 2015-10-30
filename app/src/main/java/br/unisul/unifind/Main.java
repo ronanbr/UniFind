@@ -23,7 +23,7 @@ import java.util.List;
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.viewsDB.DbHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class Main extends AppCompatActivity {
 
     DbHelper dbHelper = new DbHelper(this);
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -79,13 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.option4:
-                Intent infoGpsActivity = new Intent(this, InfoGps.class);
-                startActivity(infoGpsActivity);
-                return true;
-
-            case R.id.option5:
-                Intent blocosBD = new Intent(this, BlocosCadastrados.class);
-                startActivity(blocosBD);
+                Intent admin = new Intent(this, Admin.class);
+                startActivity(admin);
                 return true;
 
             case R.id.exit:

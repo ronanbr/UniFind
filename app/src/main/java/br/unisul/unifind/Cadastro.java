@@ -1,11 +1,10 @@
 package br.unisul.unifind;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.viewsDB.DbHelper;
 
-public class InfoGps extends AppCompatActivity implements View.OnClickListener {
+public class Cadastro extends AppCompatActivity implements View.OnClickListener {
 
     private EditText edLatitude;
     private EditText edLongitude;
@@ -35,7 +34,7 @@ public class InfoGps extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_info_gps);
+        setContentView(R.layout.activity_cadastro);
         setupElements();
         startGPS();
     }
@@ -88,12 +87,33 @@ public class InfoGps extends AppCompatActivity implements View.OnClickListener {
         bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
         DbHelper dbh = new DbHelper(this);
 
-            dbh.insertBloco(bloco);
-            edDescricao.setText("");
-            Toast.makeText(InfoGps.this, "Salvo!", Toast.LENGTH_SHORT).show();
-            finish();
+            //daqui pra baixo
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            //obter alguma informação do bundle
+            String tabela = bundle.getString("tabela");
+
+            if (tabela=="blocos"){
+                dbh.insertBloco(bloco);
+                Toast.makeText(Cadastro.this, "Salvo!", Toast.LENGTH_SHORT).show();
+                finish();
+
+            }else if (tabela=="salas"){
+
+                Toast.makeText(Cadastro.this, "Entrou no if Salas (Não implementado)", Toast.LENGTH_SHORT).show();
+
+            }else if (tabela=="servicos"){
+
+                Toast.makeText(Cadastro.this, "Entrou no if Servicos (Não implementado)", Toast.LENGTH_SHORT).show();
+
+            }else if (tabela=="campi") {
+
+                Toast.makeText(Cadastro.this, "Entrou no if Campi (Não implementado)", Toast.LENGTH_SHORT).show();
+
+            }
+
         }else{
-            Toast.makeText(InfoGps.this, "Sem localização definida ou descrição inválida!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Cadastro.this, "Sem localização definida ou descrição inválida!", Toast.LENGTH_SHORT).show();
         }
 
     }

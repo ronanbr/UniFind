@@ -119,7 +119,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"/>
 
 xmlns:tools="http://schemas.android.com/tools"
-    tools:layout="@layout/activity_info_gps"
-    tools:context=".InfoGps"
+    tools:layout="@layout/activity_cadastro"
+    tools:context=".Cadastro"
 
    -->
