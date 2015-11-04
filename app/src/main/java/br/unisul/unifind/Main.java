@@ -95,16 +95,15 @@ public class Main extends AppCompatActivity {
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
     public void startGPS(){
-        LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        LocationListener lListener = new LocationListener() {
-            public void onLocationChanged(Location locat) {
-                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locat.getLatitude(), locat.getLongitude()), 16));
-            }
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            public void onProviderEnabled(String provider) {}
-            public void onProviderDisabled(String provider) {}
-        };
-        lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, lListener);
+//        LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+//
+//        LocationListener lListener = new LocationListener(){
+//            public void onLocationChanged(Location locat) {}
+//            public void onStatusChanged(String provider, int status, Bundle extras) {}
+//            public void onProviderEnabled(String provider) {}
+//            public void onProviderDisabled(String provider) {}
+//        };
+//        lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, lListener);
     }
 
 

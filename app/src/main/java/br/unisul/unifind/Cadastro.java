@@ -53,6 +53,7 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     //Método que faz a leitura de fato dos valores recebidos do GPS
     public void startGPS(){
         LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
         LocationListener lListener = new LocationListener() {
             public void onLocationChanged(Location locat) {
                 updateView(locat);
@@ -61,7 +62,9 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
             public void onProviderEnabled(String provider) {}
             public void onProviderDisabled(String provider) {}
         };
+
         lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, lListener);
+
     }
 
     //  Método que faz a atualização da tela para o usuário.
@@ -70,11 +73,6 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
         Double longitude = locat.getLongitude();
         edLatitude.setText(latitude.toString());
         edLongitude.setText(longitude.toString());
-
-//        Double velocidade = (double) locat.getSpeed();
-//        Double altitude = locat.getAltitude();
-//        edVelocidade.setText(velocidade.toString());
-//        edAltitude.setText(altitude.toString());
     }
 
     @Override
@@ -92,6 +90,7 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
             Bundle bundle = intent.getExtras();
             //obter alguma informação do bundle
             String tabela = bundle.getString("tabela");
+            Toast.makeText(Cadastro.this, tabela, Toast.LENGTH_SHORT).show();
 
             if (tabela=="blocos"){
                 dbh.insertBloco(bloco);

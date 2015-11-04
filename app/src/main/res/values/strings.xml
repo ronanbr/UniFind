@@ -8,11 +8,17 @@
     <string name="option4">Admin</string>
     <string name="exit">Sair</string>
 
-
     <string name="String">Campus:</string>
     <string name="title_activity_cadastro_local">CadastroLocal</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_admin">Admin</string>
+
+    <string name="campus">Campus</string>
+    <string name="bloco">Bloco</string>
+    <string name="sala">Sala</string>
+    <string name="servico">Servico</string>
+
+
 </resources>
