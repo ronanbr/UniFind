@@ -36,7 +36,8 @@ public class Main extends AppCompatActivity {
         //iniica o mapa se não houver nenhum iniciado
         //e começa a leitura dos dados do GPS
         setUpMapIfNeeded();
-        startGPS();
+
+        //startGPS();
 
         //Para acompanhamento de dados:
         //Imprime no log os dados da tabela Blocos
@@ -95,15 +96,15 @@ public class Main extends AppCompatActivity {
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
     public void startGPS(){
-//        LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-//
-//        LocationListener lListener = new LocationListener(){
-//            public void onLocationChanged(Location locat) {}
-//            public void onStatusChanged(String provider, int status, Bundle extras) {}
-//            public void onProviderEnabled(String provider) {}
-//            public void onProviderDisabled(String provider) {}
-//        };
-//        lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, lListener);
+        LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        LocationListener lListener = new LocationListener(){
+            public void onLocationChanged(Location locat) {}
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onProviderEnabled(String provider) {}
+            public void onProviderDisabled(String provider) {}
+        };
+        lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, lListener);
     }
 
 
