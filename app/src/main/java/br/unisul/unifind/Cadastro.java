@@ -77,42 +77,45 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if((edLatitude.getText().toString().length()>3) && (edDescricao.getText().toString().length()>3) && (edLongitude.getText().toString().length()>3)){
-        Bloco bloco = new Bloco();
-        bloco.setId(0);
-        bloco.setDescricao(edDescricao.getText().toString());
-        bloco.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
-        bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
-        DbHelper dbh = new DbHelper(this);
+        if((edLatitude.getText().toString().length()>3) && (edLongitude.getText().toString().length()>3)){
+            if(edDescricao.getText().toString().length()>3){
+                Bloco bloco = new Bloco();
+                bloco.setId(0);
+                bloco.setDescricao(edDescricao.getText().toString());
+                bloco.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
+                bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
+                DbHelper dbh = new DbHelper(this);
 
-            //daqui pra baixo
-            Intent intent = getIntent();
-            Bundle bundle = intent.getExtras();
-            //obter alguma informação do bundle
-            String tabela = bundle.getString("tabela");
-            Toast.makeText(Cadastro.this, tabela, Toast.LENGTH_SHORT).show();
+                //daqui pra baixo
+                Intent intent = getIntent();
+                Bundle bundle = intent.getExtras();
+                //obter alguma informação do bundle
+                String tabela = bundle.getString("tabela");
+                Toast.makeText(Cadastro.this, tabela, Toast.LENGTH_SHORT).show();
 
-            if (tabela=="blocos"){
-                dbh.insertBloco(bloco);
-                Toast.makeText(Cadastro.this, "Salvo!", Toast.LENGTH_SHORT).show();
-                finish();
+                if (tabela=="blocos"){
+                    dbh.insertBloco(bloco);
+                    Toast.makeText(Cadastro.this, "Salvo!", Toast.LENGTH_SHORT).show();
+                    finish();
 
-            }else if (tabela=="salas"){
+                }else if (tabela=="salas"){
 
-                Toast.makeText(Cadastro.this, "Entrou no if Salas (Não implementado)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Cadastro.this, "Entrou no if Salas (Não implementado)", Toast.LENGTH_SHORT).show();
 
-            }else if (tabela=="servicos"){
+                }else if (tabela=="servicos"){
 
-                Toast.makeText(Cadastro.this, "Entrou no if Servicos (Não implementado)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Cadastro.this, "Entrou no if Servicos (Não implementado)", Toast.LENGTH_SHORT).show();
 
-            }else if (tabela=="campi") {
+                }else if (tabela=="campi") {
 
-                Toast.makeText(Cadastro.this, "Entrou no if Campi (Não implementado)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Cadastro.this, "Entrou no if Campi (Não implementado)", Toast.LENGTH_SHORT).show();
 
+                }
+            }else{
+                Toast.makeText(Cadastro.this, "Descrição inválida!", Toast.LENGTH_SHORT).show();
             }
-
         }else{
-            Toast.makeText(Cadastro.this, "Sem localização definida ou descrição inválida!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Cadastro.this, "Sem localização definida!", Toast.LENGTH_SHORT).show();
         }
 
     }

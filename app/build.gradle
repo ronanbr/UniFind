@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'ronan'
             keyPassword '258000'
-            storeFile file('D:/Dropbox/TCC/AndroidStudioProjects/keys.jks')
+            storeFile file('D:/Ronan Cardoso/Dropbox/Faculdade/TCC/AndroidStudioProjects/keys.jks')
             storePassword '258000'
         }
     }
@@ -25,6 +25,10 @@ android {
             versionNameSuffix 'v'
         }
         debug {
+            signingConfig signingConfigs.config
+        }
+        release {
+            debuggable true
             signingConfig signingConfigs.config
         }
     }
