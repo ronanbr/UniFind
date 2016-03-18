@@ -39,7 +39,7 @@ public class LoginAdmin extends AppCompatActivity implements LoaderCallbacks<Cur
 
     /**
      * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
+     * remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "ronan:ronantcc", "lucas:lucastcc"
@@ -155,7 +155,7 @@ public class LoginAdmin extends AppCompatActivity implements LoaderCallbacks<Cur
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
+        //HERE: Replace this with your own logic
 
        //return email.contains("@");
        return email.length()>3;
@@ -163,7 +163,7 @@ public class LoginAdmin extends AppCompatActivity implements LoaderCallbacks<Cur
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
+        //HERE: Replace this with your own logic
 
        return password.length() >3;
 
@@ -307,11 +307,11 @@ public class LoginAdmin extends AppCompatActivity implements LoaderCallbacks<Cur
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            // HERE: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
-                Thread.sleep(500);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 return false;
             }
@@ -324,7 +324,7 @@ public class LoginAdmin extends AppCompatActivity implements LoaderCallbacks<Cur
                 }
             }
 
-            // TODO: register the new account here.
+            // HERE: register the new account here.
             return false;
         }
 

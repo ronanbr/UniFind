@@ -2,6 +2,7 @@ package br.unisul.unifind;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.List;
 
@@ -82,7 +85,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             LatLng local = new LatLng(bundle.getDouble("latitudeMapa"), bundle.getDouble("longitudeMapa"));
 
             mMap.addMarker(new MarkerOptions().position(local).title(descricao));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(local, 18));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(local, 17));
 
             //retira os extras do bundle
             bundle.remove("localMapa");
@@ -90,6 +93,14 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             bundle.remove("longitudeMapa");
 
         }else{
+            LatLng infEsq = new LatLng(-28.482895, -49.019497);
+            LatLng infDir = new LatLng(-28.482565, -49.017737);
+            LatLng supDir = new LatLng(-28.474452, -49.025879);
+            LatLng supEsq = new LatLng(-28.475237, -49.027053);
+
+            Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                    .add(infEsq, infDir, supDir, supEsq));
+
             //adiciona um marker para cada bloco do banco de dados;
             List<Bloco> blocos = dbHelper.selectTodosBlocos();
             for (Bloco bloco : blocos) {
