@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.unisul.unifind" >
+    package="br.unisul.unifind">
 
     <permission android:name="com.expocodetech.android.maps.permission.MAPS_RECEIVE" />
     <!-- android:protectionLevel="signature"/> -->
@@ -19,16 +19,22 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Main"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,42 +44,45 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAN96zDlaj2L5qEmxbcRLfB4WsUY3HAuKE" />
+            android:value="@string/api_key" />
 
         <activity
             android:name=".Cadastro"
-            android:label="Cadastrar Local" >
-        </activity>
+            android:label="Cadastrar Local" />
         <activity
             android:name=".BuscaSala"
-            android:label="Busca de Sala" >
->
+            android:label="Busca de Sala">
+            >
         </activity>
         <activity
             android:name=".BuscaServico"
-            android:label="Busca de Serviço" >
->
+            android:label="Busca de Serviço">
+            >
         </activity>
         <activity
             android:name=".BuscaBloco"
-            android:label="Busca de Bloco" >
-        </activity>
+            android:label="Busca de Bloco" />
         <activity
             android:name=".LocaisCadastrados"
-            android:label="Locais Cadastrados" >
-        </activity>
+            android:label="Locais Cadastrados" />
         <activity
             android:name=".ResultadoBusca"
-            android:label="Locais Encontrados" >
-        </activity>
+            android:label="Locais Encontrados" />
         <activity
             android:name=".CadastroLocal"
-            android:label="Tipo de Local" >
-        </activity>
+            android:label="@string/title_activity_cadastro_local" />
         <activity
             android:name=".Admin"
-            android:label="Menu do Admin" >
-        </activity>
+            android:label="@string/title_activity_admin" />
+        <activity
+            android:name=".LoginAdmin"
+            android:label="@string/title_activity_login_admin" />
+        <activity
+            android:name=".Mapa"
+            android:label="@string/title_activity_mapa" />
+        <activity
+            android:name=".BuscaLocal"
+            android:label="@string/title_activity_busca_local" />
     </application>
 
 </manifest>

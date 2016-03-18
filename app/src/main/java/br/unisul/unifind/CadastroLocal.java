@@ -17,14 +17,13 @@ import br.unisul.unifind.objetos.Tabela;
 
 public class CadastroLocal extends AppCompatActivity {
 
-
-
     private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_local);
+
         listView = (ListView) findViewById(R.id.listViewCadastro);
 
 

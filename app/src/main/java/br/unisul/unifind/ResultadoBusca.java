@@ -57,8 +57,17 @@ public class ResultadoBusca extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
-                Local teste = (Local) listView.getItemAtPosition(position);
-                Toast.makeText(ResultadoBusca.this, "Um dia mostra no mapa o item " + teste.getDescricao()+"!", Toast.LENGTH_SHORT).show();
+                Local loc = (Local) listView.getItemAtPosition(position);
+
+                Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("descricaoMapa", loc.getDescricao());
+                bundle.putDouble("latitudeMapa", loc.getLatitude());
+                bundle.putDouble("longitudeMapa", loc.getLongitude());
+
+                mapa.putExtras(bundle);
+                startActivity(mapa);
             }
         });
     }

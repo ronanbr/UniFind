@@ -43,8 +43,6 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     public void setupElements() {
         edLatitude = (EditText) findViewById(R.id.edLatitude);
         edLongitude = (EditText) findViewById(R.id.edLongitude);
-//        edAltitude = (EditText) findViewById(R.id.edAltitude);
-//        edVelocidade = (EditText) findViewById(R.id.edVelocidade);
         edDescricao = (EditText) findViewById(R.id.txtDescricao);
         btSalvar = (Button) findViewById(R.id.addBloco);
         btSalvar.setOnClickListener(this);

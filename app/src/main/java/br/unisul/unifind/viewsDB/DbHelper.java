@@ -63,7 +63,6 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreateAdd("blocos", db, "Centro de Convivência", -28.480684, -49.021079);
         onCreateAdd("blocos", db, "Ginásio", -28.480798, -49.020101);
         onCreateAdd("blocos", db, "Bloco Sede", -28.482543, -49.019273);
-
         onCreateAdd("campi", db, "Tubarão", -28.479075, -49.022547);
 
     }
