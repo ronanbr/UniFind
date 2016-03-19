@@ -115,27 +115,4 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onBackPressed() { finish(); }
 
-
-
-    //maps
-//
-//    private void setUpMapIfNeeded() {
-//        // Do a null check to confirm that we have not already instantiated the map.
-//        if (mMap == null) {
-//            // Try to obtain the map from the SupportMapFragment.
-//            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-//                    .getMap();
-//            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-//            mMap.setMyLocationEnabled(true);
-//            mMap.setIndoorEnabled(true);
-//            // Check if we were successful in obtaining the map.
-//            if (mMap != null) {
-//                setUpMap();
-//            }
-//        }
-//    }
-
-
-
-
 }
