@@ -79,8 +79,16 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     private void setUpMap() {
         //caso tiver informação de local no bundle, mostrar esse local no mapa;
         if(this.bundle.containsKey("descricaoMapa")){
-            //defini um marker com o local
+            //Define o perímetro do campus
+            LatLng infEsq = new LatLng(-28.482895, -49.019497);
+            LatLng infDir = new LatLng(-28.482565, -49.017737);
+            LatLng supDir = new LatLng(-28.474452, -49.025879);
+            LatLng supEsq = new LatLng(-28.475237, -49.027053);
 
+            Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                    .add(infEsq, infDir, supDir, supEsq));
+
+            //define um marker com o local
             String descricao = bundle.getString("descricaoMapa");
             LatLng local = new LatLng(bundle.getDouble("latitudeMapa"), bundle.getDouble("longitudeMapa"));
 
@@ -93,6 +101,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             bundle.remove("longitudeMapa");
 
         }else{
+            //Define o perímetro do campus
             LatLng infEsq = new LatLng(-28.482895, -49.019497);
             LatLng infDir = new LatLng(-28.482565, -49.017737);
             LatLng supDir = new LatLng(-28.474452, -49.025879);

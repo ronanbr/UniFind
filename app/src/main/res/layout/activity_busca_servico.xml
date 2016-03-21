@@ -23,30 +23,35 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Serviço:"
         android:id="@+id/textView4"
-        android:layout_below="@+id/edCampusServico"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <AutoCompleteTextView
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/edCampusServico"
-        android:editable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="Tubarão"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/spinnerCampusServico"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:id="@+id/edServico"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerCampusServico"
+        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/edCampusServico"
-        android:layout_alignEnd="@+id/edCampusServico" />
+        android:spinnerMode="dropdown" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesquisar"
+        android:id="@+id/btnBuscaServico"
+        android:layout_below="@+id/edServico"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

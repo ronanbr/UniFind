@@ -40,6 +40,7 @@ public class CadastroLocal extends AppCompatActivity {
         listView.setAdapter(adp);
 
         final Intent cadastro = new Intent(this, Cadastro.class);
+        final Intent cadastroSala = new Intent(this, CadastroSala.class);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -47,14 +48,20 @@ public class CadastroLocal extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
                 Tabela selecionada = (Tabela) listView.getItemAtPosition(position);
 
-                //código para obter o bundle da activity anterior
-                Bundle bundle = new Bundle();
-                //adiciona alguma informação no bundle
-                bundle.putString("tabela", selecionada.getNomeNoBD());
 
-                cadastro.putExtras(bundle);
+                if (selecionada.getNomeNoBD()=="salas"){
+                    startActivity(cadastroSala);
+                }else{
+                    //código para obter o bundle da activity anterior
+                    Bundle bundle = new Bundle();
+                    //adiciona alguma informação no bundle
+                    bundle.putString("tabela", selecionada.getNomeNoBD());
 
-                startActivity(cadastro);
+                    cadastro.putExtras(bundle);
+
+                    startActivity(cadastro);
+                }
+
             }
         });
     }

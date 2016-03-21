@@ -8,11 +8,17 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import br.unisul.unifind.objetos.Bloco;
+import br.unisul.unifind.objetos.Campus;
+import br.unisul.unifind.objetos.Servico;
 import br.unisul.unifind.viewsDB.DbHelper;
 
 public class Cadastro extends AppCompatActivity implements View.OnClickListener {
@@ -21,22 +27,36 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     private EditText edLongitude;
     private EditText edDescricao;
     private Button btSalvar;
-
-//    private EditText edAltitude;
-//    private EditText edVelocidade;
+    private Spinner spinnerCampus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final DbHelper dbh = new DbHelper(this);
+        spinnerCampus = (Spinner) findViewById(R.id.spinnerCadastro);
+
+        setContentView(R.layout.activity_cadastro);
+        setupElements();
+        startGPS();
+
+        //spinner Campus
+        ArrayList<Campus> campi = dbh.selectTodosCampi();
+
+        ArrayAdapter<Campus> adp = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, campi);
+
+        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerCampus.setAdapter(adp);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_cadastro);
-        setupElements();
-        startGPS();
+
+
     }
 
     // Método usado para importar os elementos da classe R (layout por id)
@@ -51,7 +71,6 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     //Método que faz a leitura de fato dos valores recebidos do GPS
     public void startGPS(){
         LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
         LocationListener lListener = new LocationListener() {
             public void onLocationChanged(Location locat) {
                 updateView(locat);
@@ -77,35 +96,36 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         if((edLatitude.getText().toString().length()>3) && (edLongitude.getText().toString().length()>3)){
             if(edDescricao.getText().toString().length()>3){
-                Bloco bloco = new Bloco();
-                bloco.setId(0);
-                bloco.setDescricao(edDescricao.getText().toString());
-                bloco.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
-                bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
-                DbHelper dbh = new DbHelper(this);
 
-                //daqui pra baixo
+                //Recupera dados do Bundle
                 Intent intent = getIntent();
                 Bundle bundle = intent.getExtras();
-                //obter alguma informação do bundle
                 String tabela = bundle.getString("tabela");
-                Toast.makeText(Cadastro.this, tabela, Toast.LENGTH_SHORT).show();
+
+                Campus campus = (Campus) spinnerCampus.getSelectedItem();
 
                 if (tabela=="blocos"){
+                    Bloco bloco = new Bloco();
+                    bloco.setId(0);
+                    bloco.setDescricao(edDescricao.getText().toString());
+                    bloco.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
+                    bloco.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
+                    bloco.setCampus(campus);
+                    DbHelper dbh = new DbHelper(this);
                     dbh.insertBloco(bloco);
                     finish();
 
-                }else if (tabela=="salas"){
-
-                    Toast.makeText(Cadastro.this, "Entrou no if Salas (Não implementado)", Toast.LENGTH_SHORT).show();
-
                 }else if (tabela=="servicos"){
 
-                    Toast.makeText(Cadastro.this, "Entrou no if Servicos (Não implementado)", Toast.LENGTH_SHORT).show();
-
-                }else if (tabela=="campi") {
-
-                    Toast.makeText(Cadastro.this, "Entrou no if Campi (Não implementado)", Toast.LENGTH_SHORT).show();
+                    Servico servico = new Servico();
+                    servico.setId(0);
+                    servico.setDescricao(edDescricao.getText().toString());
+                    servico.setLatitude(Double.parseDouble(edLatitude.getText().toString()));
+                    servico.setLongitude(Double.parseDouble(edLongitude.getText().toString()));
+                    servico.setCampus(campus);
+                    DbHelper dbh = new DbHelper(this);
+                    dbh.insertServico(servico);
+                    finish();
 
                 }
             }else{
@@ -116,4 +136,7 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
         }
 
     }
+
+    @Override
+    public void onBackPressed() { finish(); }
 }

@@ -1,6 +1,5 @@
 package br.unisul.unifind;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,26 +13,27 @@ import java.util.ArrayList;
 
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.objetos.Campus;
+import br.unisul.unifind.objetos.Sala;
 import br.unisul.unifind.viewsDB.DbHelper;
 
+public class CadastroSala extends AppCompatActivity implements View.OnClickListener {
 
-
-public class BuscaSala extends AppCompatActivity implements View.OnClickListener {
-
-    private Button btBuscar;
-    private EditText edBusca;
+    private Button btnCadastrar;
+    private EditText edSala;
     private Spinner spinnerCampus;
     private Spinner spinnerBlocos;
+    final DbHelper dbh = new DbHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_busca_sala);
-        final DbHelper dbh = new DbHelper(this);
+        setContentView(R.layout.activity_cadastro_sala);
 
-        edBusca = (EditText) findViewById(R.id.edCadastroSala);
-        btBuscar = (Button) findViewById(R.id.btBuscaSala);
-        btBuscar.setOnClickListener(this);
+        edSala = (EditText) findViewById(R.id.edCadastroSala);
+        btnCadastrar = (Button) findViewById(R.id.btnCadastroSala);
+        btnCadastrar.setOnClickListener(this);
+
+
 
         //spinner Campus
         spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusCadastroSala);
@@ -57,7 +57,7 @@ public class BuscaSala extends AppCompatActivity implements View.OnClickListener
 
                 ArrayList<Bloco> blocos = dbh.selectBlocos("", campus.getId());
 
-                ArrayAdapter<Bloco> adp2 = new ArrayAdapter<Bloco>(BuscaSala.this,
+                ArrayAdapter<Bloco> adp2 = new ArrayAdapter<>(CadastroSala.this,
                         android.R.layout.simple_spinner_item, blocos);
 
                 adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,9 +71,6 @@ public class BuscaSala extends AppCompatActivity implements View.OnClickListener
 
             }
         });
-        //
-
-
 
     }
 
@@ -81,17 +78,12 @@ public class BuscaSala extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
 
         Bloco bloco = (Bloco) spinnerBlocos.getSelectedItem();
+        String descricaoSala = edSala.getText().toString();
 
-        //código para obter o bundle da activity anterior
-        Bundle bundle = new Bundle();
+        Sala salaInsert = new Sala(0, descricaoSala, bloco);
 
-        //adiciona alguma informação no bundle
-        bundle.putBoolean("sala", true);
-        bundle.putString("filtro", edBusca.getText().toString());
-        bundle.putInt("idBloco", bloco.getId());
+        dbh.insertSala(salaInsert);
+        finish();
 
-        Intent resultBusca = new Intent(this, ResultadoBusca.class);
-        resultBusca.putExtras(bundle);
-        startActivity(resultBusca);
     }
 }
