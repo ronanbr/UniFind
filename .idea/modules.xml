@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UniFind.iml" filepath="$PROJECT_DIR$/UniFind.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Unifind_workspaceStudio.iml" filepath="$PROJECT_DIR$/Unifind_workspaceStudio.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

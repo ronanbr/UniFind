@@ -10,9 +10,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unisul.unifind.adapter.adapter;
+import br.unisul.unifind.adapters.adapter;
 import br.unisul.unifind.objetos.Bloco;
-import br.unisul.unifind.objetos.Campus;
 import br.unisul.unifind.objetos.Local;
 import br.unisul.unifind.objetos.Sala;
 import br.unisul.unifind.viewsDB.DbHelper;

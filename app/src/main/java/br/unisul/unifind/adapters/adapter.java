@@ -1,4 +1,4 @@
-package br.unisul.unifind.adapter;
+package br.unisul.unifind.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,10 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.TwoLineListItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.objetos.Local;
 
 /**

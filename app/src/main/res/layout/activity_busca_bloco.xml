@@ -17,24 +17,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <AutoCompleteTextView
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/edCampusBloco"
-        android:layout_below="@+id/textView10"
-        android:layout_alignParentLeft="true"
-        android:editable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="Tubarão" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Bloco:"
         android:id="@+id/textView9"
-        android:layout_below="@+id/edCampusBloco"
+        android:layout_below="@+id/spinnerCampiBloco"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -50,7 +39,16 @@
         android:layout_height="wrap_content"
         android:text="Pesquisar"
         android:id="@+id/btBuscaBloco"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/edBlocoBusca"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerCampiBloco"
+        android:layout_below="@+id/textView10"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:spinnerMode="dialog" />
 </RelativeLayout>

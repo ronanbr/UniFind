@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +13,14 @@ import java.util.List;
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.objetos.Campus;
 import br.unisul.unifind.objetos.Sala;
+import br.unisul.unifind.objetos.Servico;
 
 /**
  * Created by Ronan Cardoso on 28/10/2015.
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 21;
+    private static final int VERSAO_BASE = 42;
 
     public DbHelper(Context context) {
         super(context, NOME_BASE, null, VERSAO_BASE);
@@ -29,28 +31,32 @@ public class DbHelper extends SQLiteOpenHelper {
 
         String sqlCreateTabelaCampi = "CREATE TABLE campi("
                 +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT"
+                +"descricao TEXT "
                 +")";
 
         String sqlCreateTabelaBlocos = "CREATE TABLE blocos("
                 +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +"descricao TEXT,"
                 +"latitude DOUBLE,"
-                +"longitude DOUBLE"
+                +"longitude DOUBLE, "
+                +"id_campus INTEGER NOT NULL, "
+                +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
                 +")";
 
         String sqlCreateTabelaSalas = "CREATE TABLE salas("
                 +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT,"
-                +"latitude TEXT,"
-                +"longitude TEXT"
+                +"descricao TEXT, "
+                +"id_bloco INTEGER NOT NULL, "
+                +"FOREIGN KEY(id_bloco) REFERENCES blocos(id)"
                 +")";
 
         String sqlCreateTabelaServicos = "CREATE TABLE servicos("
                 +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT,"
-                +"latitude TEXT,"
-                +"longitude TEXT"
+                +"descricao TEXT, "
+                +"latitude TEXT, "
+                +"longitude TEXT, "
+                +"id_campus INTEGER NOT NULL, "
+                +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
                 +")";
 
         db.execSQL(sqlCreateTabelaCampi);
@@ -58,17 +64,21 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateTabelaSalas);
         db.execSQL(sqlCreateTabelaServicos);
 
-        onCreateAdd("blocos", db, "Cettal", -28.475490, -49.026258);
-        onCreateAdd("blocos", db, "Saúde", -28.480209, -49.021578);
-        onCreateAdd("blocos", db, "Centro de Convivência", -28.480684, -49.021079);
-        onCreateAdd("blocos", db, "Ginásio", -28.480798, -49.020101);
-        onCreateAdd("blocos", db, "Bloco Sede", -28.482543, -49.019273);
-        onCreateAdd("campi", db, "Tubarão", -28.479075, -49.022547);
+        onCreateAddBlocos("blocos", db, "Bloco G", -28.475490, -49.026258, 1);
+        onCreateAddBlocos("blocos", db, "Saúde", -28.480209, -49.021578, 1);
+        onCreateAddBlocos("blocos", db, "Centro de Convivência", -28.480684, -49.021079, 1);
+        onCreateAddBlocos("blocos", db, "Ginásio", -28.480798, -49.020101, 1);
+        onCreateAddBlocos("blocos", db, "Bloco Sede", -28.482543, -49.019273, 1);
+        onCreateAddCampus("campi", db, "Tubarão");
+
+        Log.d("banco", "CREATE banco denovo versao: "+VERSAO_BASE);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        Log.d("banco", "UPGRADE banco denovo versao: " + VERSAO_BASE);
 
         //drop tables
         db.execSQL("DROP TABLE campi");
@@ -78,14 +88,24 @@ public class DbHelper extends SQLiteOpenHelper {
         //cria novamente
         onCreate(db);
 
+
     }
 
-    public void onCreateAdd(String table, SQLiteDatabase db, String descricao, Double lat, Double lon){
+    public void onCreateAddCampus(String table, SQLiteDatabase db, String descricao){
+        ContentValues cv = new ContentValues();
+
+        cv.put("descricao", descricao);
+
+        db.insert(table, null, cv);
+    }
+
+    public void onCreateAddBlocos(String table, SQLiteDatabase db, String descricao, Double lat, Double lon, int idCampus){
         ContentValues cv = new ContentValues();
 
         cv.put("descricao", descricao);
         cv.put("latitude", lat);
         cv.put("longitude", lon);
+        cv.put("id_campus", idCampus);
 
         db.insert(table, null, cv);
     }
@@ -110,6 +130,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put("descricao", bloco.getDescricao());
         cv.put("latitude", bloco.getLatitude());
         cv.put("longitude", bloco.getLongitude());
+        cv.put("id_campus", bloco.getCampus().getId());
 
         db.insert("blocos", null, cv);
 
@@ -122,16 +143,30 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put("descricao", sala.getDescricao());
-        cv.put("latitude", sala.getLatitude());
-        cv.put("longitude", sala.getLongitude());
+        cv.put("id_bloco", sala.getBloco().getId());
 
         db.insert("salas", null, cv);
 
         db.close();
     }
 
-    public List selectTodosCampi(){
-        List<Campus> campi = new ArrayList<Campus>();
+    public void insertServico(Servico servico){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("descricao", servico.getDescricao());
+        cv.put("latitude", servico.getLatitude());
+        cv.put("longitude", servico.getLongitude());
+        cv.put("id_campus", servico.getCampus().getId());
+
+        db.insert("servicos", null, cv);
+
+        db.close();
+    }
+
+    public ArrayList selectTodosCampi(){
+        ArrayList<Campus> campi = new ArrayList<Campus>();
 
         SQLiteDatabase db = getReadableDatabase();
 
@@ -152,22 +187,30 @@ public class DbHelper extends SQLiteOpenHelper {
         return campi;
     }
 
-    public List selectTodosBlocos(){
-        List<Bloco> blocos = new ArrayList<Bloco>();
+    public ArrayList selectTodosBlocos(){
+        ArrayList<Bloco> blocos = new ArrayList<Bloco>();
 
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelectTodosBlocos =
-                "SELECT * FROM blocos";
+                "SELECT blo.id, blo.descricao, blo.latitude, blo.longitude, " +
+                        "cam.id, cam.descricao " +
+                        "FROM blocos blo " +
+                        "INNER JOIN campi cam ON (blo.id_campus = cam.id)";
 
         Cursor c = db.rawQuery(sqlSelectTodosBlocos, null);
         if (c.moveToFirst()){
             do{
                 Bloco bloco = new Bloco();
-                bloco.setId(c.getInt(0));
-                bloco.setDescricao(c.getString(1));
-                bloco.setLatitude(c.getDouble(2));
-                bloco.setLongitude(c.getDouble(3));
+                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("blo.descricao")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+
+                Campus campus = new Campus();
+                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
+                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                bloco.setCampus(campus);
 
                 blocos.add(bloco);
             }while(c.moveToNext());
@@ -176,20 +219,37 @@ public class DbHelper extends SQLiteOpenHelper {
         return blocos;
     }
 
-    public List selectTodasSalas(){
-        List<Sala> salas = new ArrayList<Sala>();
+    public ArrayList selectTodasSalas(){
+        ArrayList<Sala> salas = new ArrayList<Sala>();
 
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelectTodosBlocos =
-                "SELECT * FROM salas";
+                "SELECT sal.descricao, sal.latitude, sal.longitude, " +
+                        "blo.id, blo.descricao, blo.latitude, blo.longitude " +
+                        "cam.id, cam.descricao " +
+                        "FROM salas sal " +
+                        "INNER JOIN blocos blo ON (blo.id = sal.id_bloco) " +
+                        "INNER JOIN campus cam ON (blo.id_campus = cam.id) ";
 
         Cursor c = db.rawQuery(sqlSelectTodosBlocos, null);
         if (c.moveToFirst()){
             do{
+                Bloco bloco = new Bloco();
+                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("blo.descricao")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+
+                Campus campus = new Campus();
+                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
+                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                bloco.setCampus(campus);
+
                 Sala sala = new Sala();
-                sala.setId(c.getInt(0));
-                sala.setDescricao(c.getString(1));
+                sala.setId(c.getInt(c.getColumnIndex("sal.id")));
+                sala.setDescricao(c.getString(c.getColumnIndex("sal.descricao")));
+                sala.setBloco(bloco);
 
                 salas.add(sala);
             }while(c.moveToNext());
@@ -198,35 +258,145 @@ public class DbHelper extends SQLiteOpenHelper {
         return salas;
     }
 
-    public List selectTodosServicos(){
-        //TODO: Depois de definir os atributos de serviços, elaborar o select
-        return null;
-    }
-
-
-
-
-    public List selectBlocos(String filtro){
-        List<Bloco> blocos = new ArrayList<Bloco>();
+    public ArrayList selectTodosServicos(){
+        ArrayList<Servico> servicos = new ArrayList<Servico>();
 
         SQLiteDatabase db = getReadableDatabase();
 
-        String sqlSelect = "SELECT * FROM blocos " +
-                "WHERE descricao LIKE '%"+filtro+"%'";
+        String sqlSelectTodosServicos =
+                "SELECT ser.id, ser.descricao, ser.latitude, ser.longitude, " +
+                        "cam.descricao, cam.id " +
+                        "FROM servicos ser " +
+                        "INNER JOIN campi cam ON (ser.id_campus = cam.id) ";
+
+        Cursor c = db.rawQuery(sqlSelectTodosServicos, null);
+        if (c.moveToFirst()){
+            do{
+
+                Campus campus = new Campus();
+                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
+                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+
+                Servico servico = new Servico();
+                servico.setId(c.getInt(c.getColumnIndex("ser.id")));
+                servico.setDescricao(c.getString(c.getColumnIndex("ser.descricao")));
+                servico.setLatitude(c.getDouble(c.getColumnIndex("ser.latitude")));
+                servico.setLongitude(c.getDouble(c.getColumnIndex("ser.longitude")));
+                servico.setCampus(campus);
+
+                servicos.add(servico);
+            }while(c.moveToNext());
+        }
+
+        return servicos;
+    }
+
+    public ArrayList selectBlocos(String filtro, int idCampus){
+        ArrayList<Bloco> blocos = new ArrayList<Bloco>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sqlSelect =
+                "SELECT blo.id, blo.descricao as descBloco, blo.latitude, blo.longitude, " +
+                        "cam.id, cam.descricao " +
+                        "FROM blocos blo " +
+                        "INNER JOIN campi cam ON (blo.id_campus = cam.id) "+
+                        "WHERE blo.descricao LIKE '%"+filtro+"%' " +
+                        "AND cam.id = "+idCampus;
 
         Cursor c = db.rawQuery(sqlSelect, null);
         if (c.moveToFirst()){
             do{
                 Bloco bloco = new Bloco();
-                bloco.setId(c.getInt(0));
-                bloco.setDescricao(c.getString(1));
-                bloco.setLatitude(c.getDouble(2));
-                bloco.setLongitude(c.getDouble(3));
+                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("descBloco")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+
+                Campus campus = new Campus();
+                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
+                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                bloco.setCampus(campus);
 
                 blocos.add(bloco);
             }while(c.moveToNext());
         }
 
         return blocos;
+    }
+
+    public ArrayList selectSalas(String filtro, int idBloco){
+        ArrayList<Sala> salas = new ArrayList<Sala>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sqlSelect =
+                "SELECT sal.descricao, sal.latitude, sal.longitude, " +
+                        "blo.id, blo.descricao, blo.latitude, blo.longitude " +
+                        "cam.id, cam.descricao " +
+                        "FROM salas sal " +
+                        "INNER JOIN blocos blo ON (blo.id = sal.id_bloco) " +
+                        "INNER JOIN campus cam ON (blo.id_campus = cam.id) "+
+                        "WHERE sal.descricao LIKE '%"+filtro+"%' " +
+                        "AND blo.id = "+idBloco;
+
+        Cursor c = db.rawQuery(sqlSelect, null);
+        if (c.moveToFirst()){
+            do{
+                Bloco bloco = new Bloco();
+                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("blo.descricao")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+
+                Campus campus = new Campus();
+                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
+                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                bloco.setCampus(campus);
+
+                Sala sala = new Sala();
+                sala.setId(c.getInt(c.getColumnIndex("sal.id")));
+                sala.setDescricao(c.getString(c.getColumnIndex("sal.descricao")));
+                sala.setBloco(bloco);
+
+                salas.add(sala);
+            }while(c.moveToNext());
+        }
+
+        return salas;
+    }
+
+    public ArrayList selectServicos(String filtro, int idCampus){
+        ArrayList<Servico> servicos = new ArrayList<Servico>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sqlSelectTodosServicos =
+                "SELECT ser.id, ser.descricao, ser.latitude, ser.longitude, " +
+                        "cam.descricao, cam.id " +
+                        "FROM servicos ser " +
+                        "INNER JOIN campi cam ON (ser.id_campus = cam.id) "+
+                        "WHERE ser.descricao LIKE '%"+filtro+"%' " +
+                        "AND cam.id = "+idCampus;
+
+        Cursor c = db.rawQuery(sqlSelectTodosServicos, null);
+        if (c.moveToFirst()){
+            do{
+                Campus campus = new Campus();
+                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
+                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+
+                Servico servico = new Servico();
+                servico.setId(c.getInt(c.getColumnIndex("ser.id")));
+                servico.setDescricao(c.getString(c.getColumnIndex("ser.descricao")));
+                servico.setLatitude(c.getDouble(c.getColumnIndex("ser.latitude")));
+                servico.setLongitude(c.getDouble(c.getColumnIndex("ser.longitude")));
+                servico.setCampus(campus);
+
+                servicos.add(servico);
+            }while(c.moveToNext());
+        }
+
+        return servicos;
     }
 }
