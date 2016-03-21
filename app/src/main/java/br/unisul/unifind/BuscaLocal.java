@@ -33,7 +33,7 @@ public class BuscaLocal extends AppCompatActivity {
         tables.add(new Tabela("Salas", "salas"));
         tables.add(new Tabela("Serviços", "servicos"));
 
-        ArrayAdapter<Tabela> adp = new ArrayAdapter<Tabela>(this, android.R.layout.simple_expandable_list_item_1, tables);
+        ArrayAdapter<Tabela> adp = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tables);
 
         listView.setAdapter(adp);
 

@@ -41,7 +41,7 @@ public class BuscaBloco extends AppCompatActivity implements View.OnClickListene
 
         ArrayList<Campus> campi = dbh.selectTodosCampi();
 
-        ArrayAdapter<Campus> adp = new ArrayAdapter<Campus>(this,
+        ArrayAdapter<Campus> adp = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, campi);
 
         adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

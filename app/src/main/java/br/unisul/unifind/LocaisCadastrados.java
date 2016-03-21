@@ -38,7 +38,7 @@ public class LocaisCadastrados extends AppCompatActivity{
         List<Sala> salas = dbHelper.selectTodasSalas();
 
         //converte bloco em local
-        List<Local> locais = new ArrayList<Local>();
+        List<Local> locais = new ArrayList<>();
         for (Bloco b : blocos) {
             locais.add(new Local(b.getDescricao(), b.getLatitude(), b.getLongitude()));
         }

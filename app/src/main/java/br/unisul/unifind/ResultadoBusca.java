@@ -15,6 +15,7 @@ import java.util.List;
 import br.unisul.unifind.adapters.adapter;
 import br.unisul.unifind.objetos.Bloco;
 import br.unisul.unifind.objetos.Local;
+import br.unisul.unifind.objetos.Sala;
 import br.unisul.unifind.viewsDB.DbHelper;
 
 public class ResultadoBusca extends AppCompatActivity {
@@ -63,27 +64,27 @@ public class ResultadoBusca extends AppCompatActivity {
             });
 
         }else if(bundle.getBoolean("sala", true)){
-//            List<Sala> salas = dbHelper.selectSala(filtro);
-//
-//            listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,blocos));
-//
-//            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//            {
-//                @Override
-//                public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-//                {
-//                    Bloco bloco = (Bloco) listView.getItemAtPosition(position);
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("descricaoMapa", bloco.getDescricao());
-//                    bundle.putDouble("latitudeMapa", bloco.getLatitude());
-//                    bundle.putDouble("longitudeMapa", bloco.getLongitude());
-//
-//                    Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
-//                    mapa.putExtras(bundle);
-//                    startActivity(mapa);
-//                }
-//            });
+                List<Sala> salas = dbHelper.selectSalas(filtro, bundle.getInt("idBloco"));
+
+                listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,salas));
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                    {
+                        Sala local = (Sala) listView.getItemAtPosition(position);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("descricaoMapa", local.getDescricao());
+                        bundle.putDouble("latitudeMapa", local.getLatitude());
+                        bundle.putDouble("longitudeMapa", local.getLongitude());
+
+                        Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
+                        mapa.putExtras(bundle);
+                        startActivity(mapa);
+                    }
+                });
 
         }else if(bundle.getBoolean("servico", true)){
 

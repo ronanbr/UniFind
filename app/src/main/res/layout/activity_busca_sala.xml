@@ -18,56 +18,59 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <AutoCompleteTextView
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/edCampusSala"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
-        android:editable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="Tubarão"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Bloco:"
         android:id="@+id/textView7"
-        android:layout_below="@+id/edCampusSala"
-        android:layout_alignParentLeft="true" />
-
-    <EditText
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentLeft="true" />
+        android:layout_below="@+id/spinnerCampusSala"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Numero da sala:"
+        android:text="Sala:"
         android:id="@+id/textView6"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true" />
+        android:layout_below="@+id/spinnerBlocoSala"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/edBuscaSala"
         android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pesquisar"
-        android:id="@+id/button3"
-        android:layout_below="@+id/editText2"
-        android:layout_alignRight="@+id/textView6"
-        android:layout_alignEnd="@+id/textView6" />
+        android:id="@+id/btBuscaSala"
+        android:layout_below="@+id/edBuscaSala"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerCampusSala"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerBlocoSala"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/textView7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -193,8 +193,8 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelectTodosBlocos =
-                "SELECT blo.id, blo.descricao, blo.latitude, blo.longitude, " +
-                        "cam.id, cam.descricao " +
+                "SELECT blo.id, blo.descricao as bloDesc, blo.latitude, blo.longitude, " +
+                        "cam.id as idCam, cam.descricao " +
                         "FROM blocos blo " +
                         "INNER JOIN campi cam ON (blo.id_campus = cam.id)";
 
@@ -203,13 +203,13 @@ public class DbHelper extends SQLiteOpenHelper {
             do{
                 Bloco bloco = new Bloco();
                 bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
-                bloco.setDescricao(c.getString(c.getColumnIndex("blo.descricao")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("bloDesc")));
                 bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
                 bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
 
                 Campus campus = new Campus();
                 campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
-                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                campus.setId(c.getInt(c.getColumnIndex("idCam")));
                 bloco.setCampus(campus);
 
                 blocos.add(bloco);
@@ -225,30 +225,31 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelectTodosBlocos =
-                "SELECT sal.descricao, sal.latitude, sal.longitude, " +
-                        "blo.id, blo.descricao, blo.latitude, blo.longitude " +
-                        "cam.id, cam.descricao " +
+                "SELECT sal.id AS idSala, sal.descricao AS descSala, " +
+                        "blo.id AS idBloco, blo.descricao AS descBloco, " +
+                        "blo.latitude AS latBloco, blo.longitude AS lonBloco, " +
+                        "cam.id AS idCampus, cam.descricao AS descCampus " +
                         "FROM salas sal " +
                         "INNER JOIN blocos blo ON (blo.id = sal.id_bloco) " +
-                        "INNER JOIN campus cam ON (blo.id_campus = cam.id) ";
+                        "INNER JOIN campi cam ON (blo.id_campus = cam.id) ";
 
         Cursor c = db.rawQuery(sqlSelectTodosBlocos, null);
         if (c.moveToFirst()){
             do{
                 Bloco bloco = new Bloco();
-                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
-                bloco.setDescricao(c.getString(c.getColumnIndex("blo.descricao")));
-                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
-                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+                bloco.setId(c.getInt(c.getColumnIndex("idBloco")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("descBloco")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("latBloco")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("lonBloco")));
 
                 Campus campus = new Campus();
-                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
-                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                campus.setDescricao(c.getString(c.getColumnIndex("descCampus")));
+                campus.setId(c.getInt(c.getColumnIndex("idCampus")));
                 bloco.setCampus(campus);
 
                 Sala sala = new Sala();
-                sala.setId(c.getInt(c.getColumnIndex("sal.id")));
-                sala.setDescricao(c.getString(c.getColumnIndex("sal.descricao")));
+                sala.setId(c.getInt(c.getColumnIndex("idSala")));
+                sala.setDescricao(c.getString(c.getColumnIndex("descSala")));
                 sala.setBloco(bloco);
 
                 salas.add(sala);
@@ -297,8 +298,9 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelect =
-                "SELECT blo.id, blo.descricao as descBloco, blo.latitude, blo.longitude, " +
-                        "cam.id, cam.descricao " +
+                "SELECT blo.id AS idBloco,  blo.descricao AS descBloco, blo.latitude AS latBloco, " +
+                        "blo.longitude AS lonBloco, " +
+                        "cam.id AS idCampus, cam.descricao AS descCampus " +
                         "FROM blocos blo " +
                         "INNER JOIN campi cam ON (blo.id_campus = cam.id) "+
                         "WHERE blo.descricao LIKE '%"+filtro+"%' " +
@@ -308,14 +310,14 @@ public class DbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             do{
                 Bloco bloco = new Bloco();
-                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
+                bloco.setId(c.getInt(c.getColumnIndex("idBloco")));
                 bloco.setDescricao(c.getString(c.getColumnIndex("descBloco")));
-                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
-                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("latBloco")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("lonBloco")));
 
                 Campus campus = new Campus();
-                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
-                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                campus.setDescricao(c.getString(c.getColumnIndex("descCampus")));
+                campus.setId(c.getInt(c.getColumnIndex("idCampus")));
                 bloco.setCampus(campus);
 
                 blocos.add(bloco);
@@ -331,12 +333,12 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelect =
-                "SELECT sal.descricao, sal.latitude, sal.longitude, " +
-                        "blo.id, blo.descricao, blo.latitude, blo.longitude " +
-                        "cam.id, cam.descricao " +
+                "SELECT sal.id AS idSala, sal.descricao AS descSala, " +
+                        "blo.id, blo.descricao, blo.latitude, blo.longitude, " +
+                        "cam.id AS idCampus, cam.descricao AS descCampus " +
                         "FROM salas sal " +
                         "INNER JOIN blocos blo ON (blo.id = sal.id_bloco) " +
-                        "INNER JOIN campus cam ON (blo.id_campus = cam.id) "+
+                        "INNER JOIN campi cam ON (blo.id_campus = cam.id) "+
                         "WHERE sal.descricao LIKE '%"+filtro+"%' " +
                         "AND blo.id = "+idBloco;
 
@@ -350,13 +352,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
 
                 Campus campus = new Campus();
-                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
-                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                campus.setDescricao(c.getString(c.getColumnIndex("descCampus")));
+                campus.setId(c.getInt(c.getColumnIndex("idCampus")));
                 bloco.setCampus(campus);
 
                 Sala sala = new Sala();
-                sala.setId(c.getInt(c.getColumnIndex("sal.id")));
-                sala.setDescricao(c.getString(c.getColumnIndex("sal.descricao")));
+                sala.setId(c.getInt(c.getColumnIndex("idSala")));
+                sala.setDescricao(c.getString(c.getColumnIndex("descSala")));
                 sala.setBloco(bloco);
 
                 salas.add(sala);
