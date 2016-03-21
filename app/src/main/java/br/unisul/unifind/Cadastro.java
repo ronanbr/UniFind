@@ -93,7 +93,6 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
 
                 if (tabela=="blocos"){
                     dbh.insertBloco(bloco);
-                    Toast.makeText(Cadastro.this, "Salvo!", Toast.LENGTH_SHORT).show();
                     finish();
 
                 }else if (tabela=="salas"){

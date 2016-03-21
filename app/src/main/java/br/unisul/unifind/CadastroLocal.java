@@ -35,7 +35,7 @@ public class CadastroLocal extends AppCompatActivity {
         tables.add(new Tabela("Campus", "campi"));
 
 
-        ArrayAdapter<Tabela> adp = new ArrayAdapter<Tabela>(this, android.R.layout.simple_expandable_list_item_1, tables);
+        ArrayAdapter<Tabela> adp = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tables);
 
         listView.setAdapter(adp);
 
@@ -46,8 +46,6 @@ public class CadastroLocal extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
                 Tabela selecionada = (Tabela) listView.getItemAtPosition(position);
-
-                Log.i("teste", "Tabela selecionada: " + selecionada.getNomeNoBD());
 
                 //código para obter o bundle da activity anterior
                 Bundle bundle = new Bundle();
