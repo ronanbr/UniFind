@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.List;
 
 import br.unisul.unifind.objetos.Bloco;
+import br.unisul.unifind.objetos.Servico;
 import br.unisul.unifind.viewsDB.DbHelper;
 
 public class Mapa extends FragmentActivity implements OnMapReadyCallback {
@@ -114,6 +115,11 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             List<Bloco> blocos = dbHelper.selectTodosBlocos();
             for (Bloco bloco : blocos) {
                 mMap.addMarker(new MarkerOptions().position(new LatLng(bloco.getLatitude(), bloco.getLongitude())).title(bloco.getDescricao()));
+            }
+
+            List<Servico> servicos = dbHelper.selectTodosServicos();
+            for (Servico svc : servicos) {
+                mMap.addMarker(new MarkerOptions().position(new LatLng(svc.getLatitude(), svc.getLongitude())).title(svc.getDescricao()));
             }
             //Define o centro do mapa na LatLong do campus de TB e define o zoom;
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-28.479075, -49.022547), 16));
