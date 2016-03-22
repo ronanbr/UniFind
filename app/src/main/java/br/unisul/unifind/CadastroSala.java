@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class CadastroSala extends AppCompatActivity implements View.OnClickListe
 
 
         //spinner Campus
-        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusCadastroSala);
+        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusBuscaSala);
 
         ArrayList<Campus> campi = dbh.selectTodosCampi();
 
@@ -82,6 +83,7 @@ public class CadastroSala extends AppCompatActivity implements View.OnClickListe
 
         Sala salaInsert = new Sala(0, descricaoSala, bloco);
 
+        Toast.makeText(this, descricaoSala+" "+bloco.getId(), Toast.LENGTH_SHORT).show();
         dbh.insertSala(salaInsert);
         finish();
 

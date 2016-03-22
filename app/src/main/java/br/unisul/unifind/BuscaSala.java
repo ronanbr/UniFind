@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,12 +32,12 @@ public class BuscaSala extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_busca_sala);
         final DbHelper dbh = new DbHelper(this);
 
-        edBusca = (EditText) findViewById(R.id.edCadastroSala);
+        edBusca = (EditText) findViewById(R.id.edBuscaSala);
         btBuscar = (Button) findViewById(R.id.btBuscaSala);
         btBuscar.setOnClickListener(this);
 
         //spinner Campus
-        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusCadastroSala);
+        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusBuscaSala);
 
         ArrayList<Campus> campi = dbh.selectTodosCampi();
 
@@ -51,13 +52,13 @@ public class BuscaSala extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //spinner Blocos
-                spinnerBlocos = (Spinner) findViewById(R.id.spinnerBlocoCadastroSala);
+                spinnerBlocos = (Spinner) findViewById(R.id.spinnerBlocoBuscaSala);
 
                 Campus campus = (Campus) spinnerCampus.getItemAtPosition(position);
 
                 ArrayList<Bloco> blocos = dbh.selectBlocos("", campus.getId());
 
-                ArrayAdapter<Bloco> adp2 = new ArrayAdapter<Bloco>(BuscaSala.this,
+                ArrayAdapter<Bloco> adp2 = new ArrayAdapter<>(BuscaSala.this,
                         android.R.layout.simple_spinner_item, blocos);
 
                 adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

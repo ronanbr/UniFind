@@ -328,13 +328,14 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList selectSalas(String filtro, int idBloco){
-        ArrayList<Sala> salas = new ArrayList<Sala>();
+        ArrayList<Sala> salas = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelect =
-                "SELECT sal.id AS idSala, sal.descricao AS descSala, " +
-                        "blo.id, blo.descricao, blo.latitude, blo.longitude, " +
+                "SELECT sal.id AS idSala, sal.descricao AS descSala, sal.id_bloco " +
+                        "blo.id AS idBloco, blo.descricao AS descBloco, blo.latitude AS latBloco, " +
+                        "blo.longitude AS lonBloco, blo.id_campus " +
                         "cam.id AS idCampus, cam.descricao AS descCampus " +
                         "FROM salas sal " +
                         "INNER JOIN blocos blo ON (blo.id = sal.id_bloco) " +
@@ -346,10 +347,10 @@ public class DbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             do{
                 Bloco bloco = new Bloco();
-                bloco.setId(c.getInt(c.getColumnIndex("blo.id")));
-                bloco.setDescricao(c.getString(c.getColumnIndex("blo.descricao")));
-                bloco.setLatitude(c.getDouble(c.getColumnIndex("blo.latitude")));
-                bloco.setLongitude(c.getDouble(c.getColumnIndex("blo.longitude")));
+                bloco.setId(c.getInt(c.getColumnIndex("idBloco")));
+                bloco.setDescricao(c.getString(c.getColumnIndex("descBloco")));
+                bloco.setLatitude(c.getDouble(c.getColumnIndex("latBloco")));
+                bloco.setLongitude(c.getDouble(c.getColumnIndex("lonBloco")));
 
                 Campus campus = new Campus();
                 campus.setDescricao(c.getString(c.getColumnIndex("descCampus")));
@@ -369,7 +370,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList selectServicos(String filtro, int idCampus){
-        ArrayList<Servico> servicos = new ArrayList<Servico>();
+        ArrayList<Servico> servicos = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
 
