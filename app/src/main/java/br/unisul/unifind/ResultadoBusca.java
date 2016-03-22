@@ -3,11 +3,13 @@ package br.unisul.unifind;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +41,8 @@ public class ResultadoBusca extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String filtro = bundle.getString("filtro");
 
-
         //TODO: Elaborar ifs para tipo de resultado
-        if(bundle.getBoolean("bloco", true)){
+        if(bundle.getBoolean("bloco")){
             List<Bloco> blocos = dbHelper.selectBlocos(filtro, bundle.getInt("campus"));
 
             listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,blocos));
@@ -64,22 +65,23 @@ public class ResultadoBusca extends AppCompatActivity {
                 }
             });
 
-        }else if(bundle.getBoolean("sala", true)){
-            List<Sala> salas = dbHelper.selectSalas(filtro, bundle.getInt("idBloco"));
+        }else if(bundle.getBoolean("sala")){
+            List<Sala> salas = dbHelper.selectSalas(bundle.getString("filtro"), bundle.getInt("idBloco"));
 
-            listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,salas));
+            listView.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1 ,salas));
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
                     {
-                        Sala local = (Sala) listView.getItemAtPosition(position);
+                        Sala sala = (Sala) listView.getItemAtPosition(position);
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("descricaoMapa", local.getDescricao());
-                        bundle.putDouble("latitudeMapa", local.getLatitude());
-                        bundle.putDouble("longitudeMapa", local.getLongitude());
+                        bundle.putString("descricaoMapa", "Bloco: "+sala.getBloco().getDescricao()
+                                +" Sala: "+sala.getDescricao());
+                        bundle.putDouble("latitudeMapa", sala.getBloco().getLatitude());
+                        bundle.putDouble("longitudeMapa", sala.getBloco().getLongitude());
 
                         Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
                         mapa.putExtras(bundle);
@@ -87,7 +89,7 @@ public class ResultadoBusca extends AppCompatActivity {
                     }
                 });
 
-        }else if(bundle.getBoolean("servico", true)){
+        }else if(bundle.getBoolean("servico")){
             List<Servico> servicos = dbHelper.selectServicos(filtro, bundle.getInt("idCampus"));
 
             listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,servicos));

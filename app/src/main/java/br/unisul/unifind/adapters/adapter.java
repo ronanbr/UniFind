@@ -57,7 +57,7 @@ public class adapter extends BaseAdapter {
         TextView text2 = twoLineListItem.getText2();
 
         text1.setText(locais.get(position).getDescricao());
-        text2.setText("(" + locais.get(position).getLatitude()+", "+ locais.get(position).getLongitude()+")");
+        text2.setText(locais.get(position).getDescricao2());
 
         return twoLineListItem;
     }

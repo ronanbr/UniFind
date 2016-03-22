@@ -6,10 +6,18 @@ package br.unisul.unifind.objetos;
 public class Local {
 
     String descricao;
+    String descricao2="";
     Double latitude, longitude;
 
     public Local(String descricao, Double latitude, Double longitude) {
         this.descricao = descricao;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public Local(String descricao, String descricao2, Double latitude, Double longitude) {
+        this.descricao = descricao;
+        this.descricao2 = descricao2;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -39,6 +47,14 @@ public class Local {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getDescricao2() {
+        return descricao2;
+    }
+
+    public void setDescricao2(String descricao2) {
+        this.descricao2 = descricao2;
     }
 
     @Override

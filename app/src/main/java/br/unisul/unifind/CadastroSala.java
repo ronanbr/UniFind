@@ -30,15 +30,12 @@ public class CadastroSala extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_sala);
 
+        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusCadastroSala);
         edSala = (EditText) findViewById(R.id.edCadastroSala);
         btnCadastrar = (Button) findViewById(R.id.btnCadastroSala);
         btnCadastrar.setOnClickListener(this);
 
-
-
         //spinner Campus
-        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusBuscaSala);
-
         ArrayList<Campus> campi = dbh.selectTodosCampi();
 
         ArrayAdapter<Campus> adp = new ArrayAdapter<>(this,
@@ -80,10 +77,7 @@ public class CadastroSala extends AppCompatActivity implements View.OnClickListe
 
         Bloco bloco = (Bloco) spinnerBlocos.getSelectedItem();
         String descricaoSala = edSala.getText().toString();
-
         Sala salaInsert = new Sala(0, descricaoSala, bloco);
-
-        Toast.makeText(this, descricaoSala+" "+bloco.getId(), Toast.LENGTH_SHORT).show();
         dbh.insertSala(salaInsert);
         finish();
 

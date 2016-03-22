@@ -29,21 +29,26 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     private Button btSalvar;
     private Spinner spinnerCampus;
 
+    LocationManager lManager;
+    LocationListener lListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final DbHelper dbh = new DbHelper(this);
-        spinnerCampus = (Spinner) findViewById(R.id.spinnerCadastro);
+
+        lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         setContentView(R.layout.activity_cadastro);
         setupElements();
         startGPS();
 
         //spinner Campus
+
         ArrayList<Campus> campi = dbh.selectTodosCampi();
 
-        ArrayAdapter<Campus> adp = new ArrayAdapter<>(this,
+        ArrayAdapter<Campus> adp = new ArrayAdapter<Campus>(this,
                 android.R.layout.simple_spinner_item, campi);
 
         adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,12 +71,12 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
         edDescricao = (EditText) findViewById(R.id.txtDescricao);
         btSalvar = (Button) findViewById(R.id.addBloco);
         btSalvar.setOnClickListener(this);
+        spinnerCampus = (Spinner) findViewById(R.id.spinnerCampusCadastro);
     }
 
     //Método que faz a leitura de fato dos valores recebidos do GPS
     public void startGPS(){
-        LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        LocationListener lListener = new LocationListener() {
+        lListener = new LocationListener() {
             public void onLocationChanged(Location locat) {
                 updateView(locat);
             }
@@ -79,9 +84,7 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
             public void onProviderEnabled(String provider) {}
             public void onProviderDisabled(String provider) {}
         };
-
         lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, lListener);
-
     }
 
     //  Método que faz a atualização da tela para o usuário.
@@ -138,5 +141,5 @@ public class Cadastro extends AppCompatActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onBackPressed() { finish(); }
+    public void onBackPressed() { finish(); lManager.removeUpdates(lListener);}
 }

@@ -333,15 +333,15 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelect =
-                "SELECT sal.id AS idSala, sal.descricao AS descSala, sal.id_bloco " +
+                "SELECT sal.id AS idSala, sal.descricao AS descSala, sal.id_bloco AS idBlocoSala, " +
                         "blo.id AS idBloco, blo.descricao AS descBloco, blo.latitude AS latBloco, " +
-                        "blo.longitude AS lonBloco, blo.id_campus " +
+                        "blo.longitude AS lonBloco, blo.id_campus, " +
                         "cam.id AS idCampus, cam.descricao AS descCampus " +
                         "FROM salas sal " +
                         "INNER JOIN blocos blo ON (blo.id = sal.id_bloco) " +
                         "INNER JOIN campi cam ON (blo.id_campus = cam.id) "+
-                        "WHERE sal.descricao LIKE '%"+filtro+"%' " +
-                        "AND blo.id = "+idBloco;
+                        "WHERE descSala LIKE '%"+filtro+"%' " +
+                        "AND idBlocoSala = "+idBloco;
 
         Cursor c = db.rawQuery(sqlSelect, null);
         if (c.moveToFirst()){
