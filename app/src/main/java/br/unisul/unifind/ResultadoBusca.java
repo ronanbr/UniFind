@@ -79,7 +79,7 @@ public class ResultadoBusca extends AppCompatActivity {
 
                         Bundle bundle = new Bundle();
                         bundle.putString("descricaoMapa", "Bloco: "+sala.getBloco().getDescricao()
-                                +" Sala: "+sala.getDescricao());
+                                +", Sala: "+sala.getDescricao());
                         bundle.putDouble("latitudeMapa", sala.getBloco().getLatitude());
                         bundle.putDouble("longitudeMapa", sala.getBloco().getLongitude());
 

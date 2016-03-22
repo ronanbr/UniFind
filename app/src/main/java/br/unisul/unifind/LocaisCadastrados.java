@@ -43,16 +43,17 @@ public class LocaisCadastrados extends AppCompatActivity{
         //converte bloco em local
         List<Local> locais = new ArrayList<>();
         for (Servico svc : servicos) {
-            locais.add(new Local("Serviço: " + svc.getDescricao(), "Campus: " +
+            locais.add(new Local("Serviço: " + svc.getDescricao(),
                     svc.getCampus().getDescricao(), svc.getLatitude(), svc.getLongitude()));
         }
 
         for (Bloco b : blocos) {
-            locais.add(new Local("Bloco: "+b.getDescricao(), "Campus: "+ b.getCampus().getDescricao(),
+            locais.add(new Local("Bloco: "+b.getDescricao(), b.getCampus().getDescricao(),
                     b.getLatitude(), b.getLongitude()));
         }
         for (Sala s : salas) {
-            locais.add(new Local("Sala: "+s.getDescricao(), "Bloco: "+s.getBloco().getDescricao(),
+            locais.add(new Local("Sala: "+s.getDescricao(),
+                    s.getBloco().getDescricao()+", "+s.getBloco().getCampus().getDescricao(),
                     s.getBloco().getLatitude(), s.getBloco().getLongitude()));
         }
 

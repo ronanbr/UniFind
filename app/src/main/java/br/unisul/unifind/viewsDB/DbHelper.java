@@ -20,7 +20,7 @@ import br.unisul.unifind.objetos.Servico;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 42;
+    private static final int VERSAO_BASE = 43;
 
     public DbHelper(Context context) {
         super(context, NOME_BASE, null, VERSAO_BASE);
@@ -66,19 +66,18 @@ public class DbHelper extends SQLiteOpenHelper {
 
         onCreateAddBlocos("blocos", db, "Bloco G", -28.475490, -49.026258, 1);
         onCreateAddBlocos("blocos", db, "Saúde", -28.480209, -49.021578, 1);
-        onCreateAddBlocos("blocos", db, "Centro de Convivência", -28.480684, -49.021079, 1);
-        onCreateAddBlocos("blocos", db, "Ginásio", -28.480798, -49.020101, 1);
-        onCreateAddBlocos("blocos", db, "Bloco Sede", -28.482543, -49.019273, 1);
+        onCreateAddBlocos("servicos", db, "Centro de Convivência", -28.480684, -49.021079, 1);
+        onCreateAddBlocos("servicos", db, "Ginásio", -28.480798, -49.020101, 1);
+        onCreateAddBlocos("blocos", db, "Sede", -28.482543, -49.019273, 1);
         onCreateAddCampus("campi", db, "Tubarão");
-
-        Log.d("banco", "CREATE banco denovo versao: "+VERSAO_BASE);
+        onCreateAddBlocos("servicos", db, "GTI", -28.483659, -49.013435, 1);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        Log.d("banco", "UPGRADE banco denovo versao: " + VERSAO_BASE);
+        Log.d("banco", "UPGRADE banco versao anterior: " + VERSAO_BASE);
 
         //drop tables
         db.execSQL("DROP TABLE campi");
@@ -265,8 +264,8 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelectTodosServicos =
-                "SELECT ser.id, ser.descricao, ser.latitude, ser.longitude, " +
-                        "cam.descricao, cam.id " +
+                "SELECT ser.id AS idSvc, ser.descricao AS descSvc, ser.latitude AS latSvc, ser.longitude AS lonSvc, " +
+                        "cam.descricao AS descCampus, cam.id AS idCampus " +
                         "FROM servicos ser " +
                         "INNER JOIN campi cam ON (ser.id_campus = cam.id) ";
 
@@ -275,14 +274,14 @@ public class DbHelper extends SQLiteOpenHelper {
             do{
 
                 Campus campus = new Campus();
-                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
-                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                campus.setDescricao(c.getString(c.getColumnIndex("descCampus")));
+                campus.setId(c.getInt(c.getColumnIndex("idCampus")));
 
                 Servico servico = new Servico();
-                servico.setId(c.getInt(c.getColumnIndex("ser.id")));
-                servico.setDescricao(c.getString(c.getColumnIndex("ser.descricao")));
-                servico.setLatitude(c.getDouble(c.getColumnIndex("ser.latitude")));
-                servico.setLongitude(c.getDouble(c.getColumnIndex("ser.longitude")));
+                servico.setId(c.getInt(c.getColumnIndex("idSvc")));
+                servico.setDescricao(c.getString(c.getColumnIndex("descSvc")));
+                servico.setLatitude(c.getDouble(c.getColumnIndex("latSvc")));
+                servico.setLongitude(c.getDouble(c.getColumnIndex("lonSvc")));
                 servico.setCampus(campus);
 
                 servicos.add(servico);
@@ -375,8 +374,8 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String sqlSelectTodosServicos =
-                "SELECT ser.id, ser.descricao, ser.latitude, ser.longitude, " +
-                        "cam.descricao, cam.id " +
+                "SELECT ser.id AS idSvc, ser.descricao AS descSvc, ser.latitude AS latSvc, ser.longitude AS lonSvc, " +
+                        "cam.descricao AS descCampus, cam.id AS idCampus " +
                         "FROM servicos ser " +
                         "INNER JOIN campi cam ON (ser.id_campus = cam.id) "+
                         "WHERE ser.descricao LIKE '%"+filtro+"%' " +
@@ -386,14 +385,14 @@ public class DbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             do{
                 Campus campus = new Campus();
-                campus.setDescricao(c.getString(c.getColumnIndex("cam.descricao")));
-                campus.setId(c.getInt(c.getColumnIndex("cam.id")));
+                campus.setDescricao(c.getString(c.getColumnIndex("descCampus")));
+                campus.setId(c.getInt(c.getColumnIndex("idCampus")));
 
                 Servico servico = new Servico();
-                servico.setId(c.getInt(c.getColumnIndex("ser.id")));
-                servico.setDescricao(c.getString(c.getColumnIndex("ser.descricao")));
-                servico.setLatitude(c.getDouble(c.getColumnIndex("ser.latitude")));
-                servico.setLongitude(c.getDouble(c.getColumnIndex("ser.longitude")));
+                servico.setId(c.getInt(c.getColumnIndex("idSvc")));
+                servico.setDescricao(c.getString(c.getColumnIndex("descSvc")));
+                servico.setLatitude(c.getDouble(c.getColumnIndex("latSvc")));
+                servico.setLongitude(c.getDouble(c.getColumnIndex("lonSvc")));
                 servico.setCampus(campus);
 
                 servicos.add(servico);
