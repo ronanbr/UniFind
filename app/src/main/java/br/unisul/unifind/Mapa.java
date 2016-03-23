@@ -87,7 +87,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             LatLng supEsq = new LatLng(-28.475237, -49.027053);
 
             Polygon polygon = mMap.addPolygon(new PolygonOptions()
-                    .add(infEsq, infDir, supDir, supEsq));
+                    .add(infEsq, infDir, supDir, supEsq).strokeColor(R.color.primary));
 
             //define um marker com o local
             String descricao = bundle.getString("descricaoMapa");
@@ -109,7 +109,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             LatLng supEsq = new LatLng(-28.475237, -49.027053);
 
             Polygon polygon = mMap.addPolygon(new PolygonOptions()
-                    .add(infEsq, infDir, supDir, supEsq));
+                    .add(infEsq, infDir, supDir, supEsq).strokeColor(R.color.primary));
 
             //adiciona um marker para cada bloco do banco de dados;
             List<Bloco> blocos = dbHelper.selectTodosBlocos();
