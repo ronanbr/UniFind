@@ -15,14 +15,13 @@ android {
         applicationId "br.unisul.unifind"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 1
-        versionName 'v'
+        versionCode 2
+        versionName 'Beta'
         signingConfig signingConfigs.config
     }
     buildTypes {
         UnifindRelease {
             signingConfig signingConfigs.config
-            versionNameSuffix 'v'
         }
         debug {
             signingConfig signingConfigs.config

@@ -48,11 +48,11 @@ public class LocaisCadastrados extends AppCompatActivity{
         }
 
         for (Bloco b : blocos) {
-            locais.add(new Local("Bloco: "+b.getDescricao(), b.getCampus().getDescricao(),
+            locais.add(new Local(b.getDescricao(), b.getCampus().getDescricao(),
                     b.getLatitude(), b.getLongitude()));
         }
         for (Sala s : salas) {
-            locais.add(new Local("Sala: "+s.getDescricao(),
+            locais.add(new Local(s.getDescricao(),
                     s.getBloco().getDescricao()+", "+s.getBloco().getCampus().getDescricao(),
                     s.getBloco().getLatitude(), s.getBloco().getLongitude()));
         }

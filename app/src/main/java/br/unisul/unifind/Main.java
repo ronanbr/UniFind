@@ -33,7 +33,7 @@ public class Main extends AppCompatActivity {
         opcoes.add(new ItemMenu(3, "Menu Admin"));
         opcoes.add(new ItemMenu(4, "Sair"));
 
-        ArrayAdapter<ItemMenu> adp = new ArrayAdapter<ItemMenu>(this, android.R.layout.simple_list_item_1, opcoes);
+        ArrayAdapter<ItemMenu> adp = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, opcoes);
 
         listView.setAdapter(adp);
 
@@ -50,7 +50,7 @@ public class Main extends AppCompatActivity {
                         break;
                     case 2:
                         Intent mapa = new Intent(Main.this, Mapa.class);
-                        //código para obter o bundle da activity anterior
+                        //Obrigatorio pois o mapa verifica dados na bundle
                         Bundle bundle = new Bundle();
                         mapa.putExtras(bundle);
                         startActivity(mapa);
