@@ -20,7 +20,7 @@ import br.unisul.unifind.objetos.Servico;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 43;
+    private static final int VERSAO_BASE = 44; //kitkat
 
     public DbHelper(Context context) {
         super(context, NOME_BASE, null, VERSAO_BASE);
@@ -419,7 +419,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cv = new ContentValues(); cv.put("descricao", "BLOCO F - Centec");  cv.put("latitude", -28.47963800);  cv.put("longitude", -49.02135900);  cv.put("id_campus", 1); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "BLOCO G - Cettal");  cv.put("latitude", -28.47549000);  cv.put("longitude", -49.02625800); cv.put("id_campus", 1); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "BLOCO H - Núcleo de Informatica");  cv.put("latitude", -28.47521400);  cv.put("longitude", -49.02552400);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO E - Hospital Veterinário");  cv.put("latitude", -28.47521400);  cv.put("longitude", -49.02552400);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Hospital Veterinário");  cv.put("latitude", -28.47521400);  cv.put("longitude", -49.02552400);  cv.put("id_campus", 1); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Bloco de A.R. de Judô");  cv.put("latitude", 	-28.48079800);  cv.put("longitude", -49.02010100);  cv.put("id_campus", 1); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Unidade Hospitalar de Ensino");  cv.put("latitude", -28.48079800);  cv.put("longitude", -49.02010100);  cv.put("id_campus", 1); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Prédio da Fundação");  cv.put("latitude", -28.483659);  cv.put("longitude", -49.013435);  cv.put("id_campus", 1); dados.add(cv);
