@@ -78,8 +78,8 @@ public class ResultadoBusca extends AppCompatActivity {
                         Sala sala = (Sala) listView.getItemAtPosition(position);
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("descricaoMapa", "Bloco: "+sala.getBloco().getDescricao()
-                                +", Sala: "+sala.getDescricao());
+                        bundle.putString("descricaoMapa", sala.getBloco().getDescricao()
+                                +", "+sala.getDescricao());
                         bundle.putDouble("latitudeMapa", sala.getBloco().getLatitude());
                         bundle.putDouble("longitudeMapa", sala.getBloco().getLongitude());
 

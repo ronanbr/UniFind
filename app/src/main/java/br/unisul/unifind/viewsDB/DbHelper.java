@@ -20,7 +20,7 @@ import br.unisul.unifind.objetos.Servico;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 44; //kitkat
+    private static final int VERSAO_BASE = 50;
 
     public DbHelper(Context context) {
         super(context, NOME_BASE, null, VERSAO_BASE);
@@ -398,11 +398,15 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         //Serviços
-        cv = new ContentValues(); cv.put("descricao", "GTI");  cv.put("latitude", -28.483657);  cv.put("longitude", -49.013433);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "RH");  cv.put("latitude", -28.483656);  cv.put("longitude", -49.013432);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "CC - Centro de Convivência");  cv.put("latitude", -28.480684);  cv.put("longitude", -49.021079);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "SAIAC CC");  cv.put("latitude", -28.480682);  cv.put("longitude", -49.021077);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Ginásio");  cv.put("latitude", -28.480798);  cv.put("longitude", -49.020101);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "GTI");  cv.put("latitude", -28.483492);  cv.put("longitude", -49.013177);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Recursos Humanos");  cv.put("latitude", -28.483501);  cv.put("longitude", -49.013336);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Centro de Convivência (CC)");  cv.put("latitude", -28.480716);  cv.put("longitude", -49.021318);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "SAIAC (CC)");  cv.put("latitude", -28.480716);  cv.put("longitude", -49.021130);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Ginásio");  cv.put("latitude", -28.480781);  cv.put("longitude", -49.020236);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Biblioteca");  cv.put("latitude", -28.481257);  cv.put("longitude", -49.019748);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Unisul Virtual");  cv.put("latitude", -28.481384);  cv.put("longitude", -49.019169);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Parque Tecnológico");  cv.put("latitude", -28.480849);  cv.put("longitude", -49.021453);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "DCE");  cv.put("latitude", -28.479884);  cv.put("longitude", -49.021971);  cv.put("id_campus", 1); dados.add(cv);
 
         for(ContentValues contv : dados){
             db.insert("servicos", null, contv);
@@ -411,18 +415,19 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         //Blocos do Campus Tubarão
-        cv = new ContentValues(); cv.put("descricao", "BLOCO A - Sede");  cv.put("latitude", -28.48254300);  cv.put("longitude", -49.01927300);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO B - Dehon");  cv.put("latitude", -28.48254300);  cv.put("longitude", -49.01927300);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO C - Saude");  cv.put("latitude", -28.48018400);  cv.put("longitude", -49.02178800);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO D - Pedagógico");  cv.put("latitude", -28.47963800);  cv.put("longitude", -49.02135900);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO E");  cv.put("latitude", -28.47963800);  cv.put("longitude", -49.02135900);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO F - Centec");  cv.put("latitude", -28.47963800);  cv.put("longitude", -49.02135900);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO G - Cettal");  cv.put("latitude", -28.47549000);  cv.put("longitude", -49.02625800); cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "BLOCO H - Núcleo de Informatica");  cv.put("latitude", -28.47521400);  cv.put("longitude", -49.02552400);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Hospital Veterinário");  cv.put("latitude", -28.47521400);  cv.put("longitude", -49.02552400);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Bloco de A.R. de Judô");  cv.put("latitude", 	-28.48079800);  cv.put("longitude", -49.02010100);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Unidade Hospitalar de Ensino");  cv.put("latitude", -28.48079800);  cv.put("longitude", -49.02010100);  cv.put("id_campus", 1); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Prédio da Fundação");  cv.put("latitude", -28.483659);  cv.put("longitude", -49.013435);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO A - Sede");  cv.put("latitude", -28.482450);  cv.put("longitude", -49.019388);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO B - Dehon");  cv.put("latitude", -28.482021);  cv.put("longitude", -49.020016);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO C - Saude");  cv.put("latitude", -28.480118);  cv.put("longitude", -49.021700);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO D - Pedagógico");  cv.put("latitude", -28.479698);  cv.put("longitude", -49.021282);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO E");  cv.put("latitude", -28.477983);  cv.put("longitude", -49.022915);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO F - Centec");  cv.put("latitude", -28.476301);  cv.put("longitude", -49.025338);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO G - Cettal");  cv.put("latitude", -28.475761);  cv.put("longitude", -49.026212); cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "BLOCO H - Núcleo de Informatica");  cv.put("latitude", -28.475249);  cv.put("longitude", -49.025571);  cv.put("id_campus", 1); dados.add(cv);
+        cv = new ContentValues(); cv.put("descricao", "Hospital Veterinário");  cv.put("latitude", -28.478138);  cv.put("longitude", -49.022747);  cv.put("id_campus", 1); dados.add(cv);
+
+//        cv = new ContentValues(); cv.put("descricao", "Bloco de A.R. de Judô");  cv.put("latitude", 	-28.48079800);  cv.put("longitude", -49.02010100);  cv.put("id_campus", 1); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Unidade Hospitalar de Ensino");  cv.put("latitude", -28.48079800);  cv.put("longitude", -49.02010100);  cv.put("id_campus", 1); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Prédio da Fundação");  cv.put("latitude", -28.483659);  cv.put("longitude", -49.013435);  cv.put("id_campus", 1); dados.add(cv);
 
         for(ContentValues contv : dados){
             db.insert("blocos", null, contv);
@@ -731,25 +736,25 @@ public class DbHelper extends SQLiteOpenHelper {
         cv = new ContentValues(); cv.put("descricao", "Sala de aula - Edição Radio TV (TBEDICAO)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Sala 11 (TB11G)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. Grafico I (TBLBGRF1G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 01 (TBLBINF1G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 02 (TBLBINF2G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 03 (TBLBINF3G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 04 (TBLBINF4G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 05 (TBLBINF5G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 06 (TBLBINF6G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 07 (TBLBINF7G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 08 (TBLINF8G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 3 (TBCETTAL3G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 5 (TBCETTAL5G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 11 (TBCETTAL11)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 4 (TBCETTAL4G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 10 (TBCETTAL10)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 2 (TBCETTAL2G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 1 (TBCETTAL1G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 8 (TBCETTAL8G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 6 (TBCETTAL6G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 9 (TBCETTAL9G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 7 (TBCETTAL7G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 01 (TBLBINF1G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 02 (TBLBINF2G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 03 (TBLBINF3G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 04 (TBLBINF4G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 05 (TBLBINF5G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 06 (TBLBINF6G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 07 (TBLBINF7G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 08 (TBLINF8G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 3 (TBCETTAL3G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 5 (TBCETTAL5G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 11 (TBCETTAL11)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 4 (TBCETTAL4G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 10 (TBCETTAL10)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 2 (TBCETTAL2G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 1 (TBCETTAL1G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 8 (TBCETTAL8G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 6 (TBCETTAL6G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 9 (TBCETTAL9G)");  cv.put("id_bloco", 7); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Lab. Informática 7 (TBCETTAL7G)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. de Projeto (TBLBPROJG)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. de Radio 1 (TBLBRAD1G)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. de Radio 2 (TBLBRAD2G)");  cv.put("id_bloco", 7); dados.add(cv);
@@ -759,16 +764,16 @@ public class DbHelper extends SQLiteOpenHelper {
         cv = new ContentValues(); cv.put("descricao", "Lab. Projeção II (TBPRJC2G)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "TRC 1º Sem (TBTRC1G)");  cv.put("id_bloco", 7); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "TRC 3º Sem (TBTRC3G)");  cv.put("id_bloco", 7); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 105 (TB105H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 106 (TB106H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 107 (TB107H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 108 (TB108H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 109 (TB109H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 110 (TB110H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 111 (TB111H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 112 (TB112H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 113 (TB113H)");  cv.put("id_bloco", 8); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 114 (TB114H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 105 (TB105H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 106 (TB106H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 107 (TB107H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 108 (TB108H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 109 (TB109H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 110 (TB110H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 111 (TB111H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 112 (TB112H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 113 (TB113H)");  cv.put("id_bloco", 8); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 114 (TB114H)");  cv.put("id_bloco", 8); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. de Informática 07 (LAB_INF-07)");  cv.put("id_bloco", 8); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. de Informática 06 (LAB_INF-06)");  cv.put("id_bloco", 8); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Lab. de Informática 01 (LAB_INF-01)");  cv.put("id_bloco", 8); dados.add(cv);
@@ -780,16 +785,19 @@ public class DbHelper extends SQLiteOpenHelper {
         cv = new ContentValues(); cv.put("descricao", "Lab. de Informática 09 (LAB_INF-09)");  cv.put("id_bloco", 8); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Sala 1 (TBHV1E)");  cv.put("id_bloco", 9); dados.add(cv);
         cv = new ContentValues(); cv.put("descricao", "Sala 2 (TBHV2E)");  cv.put("id_bloco", 9); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 1 (TBGARJ001)");  cv.put("id_bloco", 10); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Laboratório de Gin stica (TBGARJL01)");  cv.put("id_bloco", 10); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Laboratório de Lutas Esportiva (TBGARJL02)");  cv.put("id_bloco", 10); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Laboratório de Musculação (TBGARJL03)");  cv.put("id_bloco", 10); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 001 (TBUHEN001)");  cv.put("id_bloco", 11); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 002 (TBUHEN002)");  cv.put("id_bloco", 11); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 003 (TBUHEN003)");  cv.put("id_bloco", 11); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 004 (TBUHEN004)");  cv.put("id_bloco", 11); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Sala 005 (TBUHEN005)");  cv.put("id_bloco", 11); dados.add(cv);
-        cv = new ContentValues(); cv.put("descricao", "Auditório (TBUHENAUD)");  cv.put("id_bloco", 11); dados.add(cv);
+
+//        nao mapeado ainda:
+
+//        cv = new ContentValues(); cv.put("descricao", "Sala 1 (TBGARJ001)");  cv.put("id_bloco", 10); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Laboratório de Gin stica (TBGARJL01)");  cv.put("id_bloco", 10); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Laboratório de Lutas Esportiva (TBGARJL02)");  cv.put("id_bloco", 10); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Laboratório de Musculação (TBGARJL03)");  cv.put("id_bloco", 10); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 001 (TBUHEN001)");  cv.put("id_bloco", 11); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 002 (TBUHEN002)");  cv.put("id_bloco", 11); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 003 (TBUHEN003)");  cv.put("id_bloco", 11); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 004 (TBUHEN004)");  cv.put("id_bloco", 11); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Sala 005 (TBUHEN005)");  cv.put("id_bloco", 11); dados.add(cv);
+//        cv = new ContentValues(); cv.put("descricao", "Auditório (TBUHENAUD)");  cv.put("id_bloco", 11); dados.add(cv);
         for(ContentValues contv : dados){
             db.insert("salas", null, contv);
         }

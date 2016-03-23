@@ -81,10 +81,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         //caso tiver informação de local no bundle, mostrar esse local no mapa;
         if(this.bundle.containsKey("descricaoMapa")){
             //Define o perímetro do campus
-            LatLng infEsq = new LatLng(-28.482895, -49.019497);
-            LatLng infDir = new LatLng(-28.482565, -49.017737);
-            LatLng supDir = new LatLng(-28.474452, -49.025879);
-            LatLng supEsq = new LatLng(-28.475237, -49.027053);
+            LatLng infEsq = new LatLng(-28.482994, -49.019523);
+            LatLng infDir = new LatLng(-28.482652, -49.017513);
+            LatLng supDir = new LatLng(-28.474512, -49.026091);
+            LatLng supEsq = new LatLng(-28.475237, -49.027319);
 
             Polygon polygon = mMap.addPolygon(new PolygonOptions()
                     .add(infEsq, infDir, supDir, supEsq).strokeColor(R.color.primary));
@@ -103,10 +103,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
 
         }else{
             //Define o perímetro do campus
-            LatLng infEsq = new LatLng(-28.482895, -49.019497);
-            LatLng infDir = new LatLng(-28.482565, -49.017737);
-            LatLng supDir = new LatLng(-28.474452, -49.025879);
-            LatLng supEsq = new LatLng(-28.475237, -49.027053);
+            LatLng infEsq = new LatLng(-28.482994, -49.019523);
+            LatLng infDir = new LatLng(-28.482652, -49.017513);
+            LatLng supDir = new LatLng(-28.474512, -49.026091);
+            LatLng supEsq = new LatLng(-28.475237, -49.027319);
 
             Polygon polygon = mMap.addPolygon(new PolygonOptions()
                     .add(infEsq, infDir, supDir, supEsq).strokeColor(R.color.primary));
