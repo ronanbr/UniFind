@@ -8,11 +8,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
+
+import br.unisul.unifind.adapters.AdapterListView;
+import br.unisul.unifind.objetos.ItemListView;
 import br.unisul.unifind.objetos.ItemMenu;
 
 public class Main extends AppCompatActivity {
 
     private ListView listView;
+    private AdapterListView adapterListView;
+    private ArrayList<ItemListView> itens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +31,30 @@ public class Main extends AppCompatActivity {
     private void configurarListaDeOpcoes(){
         listView = (ListView) findViewById(R.id.mainListView);
 
-        ArrayList<ItemMenu> opcoes = new ArrayList<ItemMenu>();
+        itens = new ArrayList<ItemListView>();
+        ItemListView item1 = new ItemListView(1, "Buscar Local", R.drawable.search);
+        ItemListView item2 = new ItemListView(2, "Navegar no Mapa", R.drawable.location);
+        ItemListView item3 = new ItemListView(3, "Menu Admin", R.drawable.admin);
+        ItemListView item4 = new ItemListView(4, "Sair", R.drawable.close2);
 
-        opcoes.add(new ItemMenu(1, "Buscar Local"));
-        opcoes.add(new ItemMenu(2, "Navegar no Mapa"));
-        opcoes.add(new ItemMenu(3, "Menu Admin"));
-        opcoes.add(new ItemMenu(4, "Sair"));
+        itens.add(item1);
+        itens.add(item2);
+        itens.add(item3);
+        itens.add(item4);
 
-        ArrayAdapter<ItemMenu> adp = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, opcoes);
+        //Cria o adapter
+        adapterListView = new AdapterListView(this, itens);
 
-        listView.setAdapter(adp);
+        //Define o Adapter
+        listView.setAdapter(adapterListView);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
-                ItemMenu item = (ItemMenu) listView.getItemAtPosition(position);
+                ItemListView item = (ItemListView) listView.getItemAtPosition(position);
                 switch (item.getId()) {
                     case 1:
                         Intent busca = new Intent(Main.this, BuscaLocal.class);

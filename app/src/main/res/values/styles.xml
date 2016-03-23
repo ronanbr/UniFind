@@ -1,20 +1,32 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textColorPrimary">@color/primary</item>
+        <item name="android:textColorSecondary">@color/primary_dark</item>
+        <item name="android:textColorTertiary">@color/primary</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/primary</item>
+
     </style>
 
-    <style name="FullscreenTheme" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    <style name="AppSplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:windowBackground">@color/backgroundSplash</item>
+        <item name="android:colorBackground">@color/backgroundSplash</item>
+        <item name="android:text">@color/primary_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/backgroundSplash</item>
+
     </style>
 
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+    <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/primary</item>
     </style>
+
 
 </resources>

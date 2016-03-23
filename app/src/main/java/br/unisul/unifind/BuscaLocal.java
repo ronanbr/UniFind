@@ -12,12 +12,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unisul.unifind.adapters.AdapterListView;
+import br.unisul.unifind.objetos.ItemListView;
 import br.unisul.unifind.objetos.ItemMenu;
 import br.unisul.unifind.objetos.Tabela;
 
 public class BuscaLocal extends AppCompatActivity {
 
     private ListView listView;
+    private AdapterListView adapterListView;
+    private ArrayList<ItemListView> itens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +31,20 @@ public class BuscaLocal extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listViewBusca);
 
-        List<Tabela> tables = new ArrayList<Tabela>();
+        itens = new ArrayList<ItemListView>();
+        ItemListView item1 = new ItemListView(1, "Blocos", R.drawable.bloco);
+        ItemListView item2 = new ItemListView(2, "Salas", R.drawable.sala);
+        ItemListView item3 = new ItemListView(3, "Serviços", R.drawable.servico);
 
-        tables.add(new Tabela("Blocos", "blocos"));
-        tables.add(new Tabela("Salas", "salas"));
-        tables.add(new Tabela("Serviços", "servicos"));
+        itens.add(item1);
+        itens.add(item2);
+        itens.add(item3);
 
-        ArrayAdapter<Tabela> adp = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tables);
+        //Cria o adapter
+        adapterListView = new AdapterListView(this, itens);
 
-        listView.setAdapter(adp);
+        //Define o Adapter
+        listView.setAdapter(adapterListView);
 
         final Intent buscaBloco = new Intent(this, BuscaBloco.class);
         final Intent buscaSala = new Intent(this, BuscaSala.class);
@@ -44,16 +53,16 @@ public class BuscaLocal extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Tabela tbl = (Tabela) listView.getItemAtPosition(position);
+                ItemListView item = (ItemListView) listView.getItemAtPosition(position);
 
-                switch (tbl.getNomeNoBD()) {
-                    case "blocos":
+                switch (item.getId()) {
+                    case 1:
                         startActivity(buscaBloco);
                         break;
-                    case "salas":
+                    case 2:
                         startActivity(buscaSala);
                         break;
-                    case "servicos":
+                    case 3:
                         startActivity(buscaServico);
                         break;
                 }

@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
     tools:context="br.unisul.unifind.SplashScreen">
 
     <ImageView
@@ -17,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:textSize="12dp"
-        android:textColor="#454545"
+        android:textColor="@color/primary_dark"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:text="Developed by: Ronan Cardoso | Lucas Souza" />
