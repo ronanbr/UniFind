@@ -1,16 +1,12 @@
 package br.unisul.unifind;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
-import android.view.View;
+
+import br.unisul.unifind.json.DownloadJsonAsyncTaskCampus;
+import br.unisul.unifind.viewsDB.DbHelper;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -25,21 +21,21 @@ public class SplashScreen extends Activity {
                super.onCreate(savedInstanceState);
                setContentView(R.layout.activity_splash_screen);
 
-               new Handler().postDelayed(new Runnable() {
-                      /*
-                       * Exibindo splash com um timer.
-                       */
-                      @Override
-                      public void run() {
-                             // Esse método será executado sempre que o timer acabar
-                             // E inicia a activity principal
-                             Intent i = new Intent(SplashScreen.this, Main.class);
-                             startActivity(i);
+             new Handler().postDelayed(new Runnable() {
+                 /*
+                  * Exibindo splash com um timer.
+                  */
+                 @Override
+                 public void run() {
+                     // Esse método será executado sempre que o timer acabar
+                     // E inicia a activity principal
+                     Intent i = new Intent(SplashScreen.this, Main.class);
+                     startActivity(i);
 
-                             // Fecha esta activity
-                             finish();
-                      }
-               }, SPLASH_TIME_OUT);
+                     // Fecha esta activity
+                     finish();
+                 }
+             }, SPLASH_TIME_OUT);
+
          }
-
 }

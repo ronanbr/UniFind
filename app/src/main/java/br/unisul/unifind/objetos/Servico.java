@@ -1,9 +1,16 @@
 package br.unisul.unifind.objetos;
 
+import java.io.Serializable;
+
 /**
  * Created by Ronan Cardoso on 28/10/2015.
  */
-public class Servico {
+public class Servico implements Serializable {
+
+    /**
+     * POJO
+     */
+    private static final long serialVersionUID = 1L;
     private int id;
     private String descricao;
     private Double latitude, longitude;

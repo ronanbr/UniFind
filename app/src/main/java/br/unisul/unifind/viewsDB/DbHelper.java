@@ -22,42 +22,43 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String NOME_BASE = "UniFindData";
     private static final int VERSAO_BASE = 50;
 
+    String sqlCreateTabelaCampi = "CREATE TABLE campi("
+            +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +"descricao TEXT "
+            +")";
+
+    String sqlCreateTabelaBlocos = "CREATE TABLE blocos("
+            +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +"descricao TEXT,"
+            +"latitude DOUBLE,"
+            +"longitude DOUBLE, "
+            +"id_campus INTEGER NOT NULL, "
+            +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
+            +")";
+
+    String sqlCreateTabelaSalas = "CREATE TABLE salas("
+            +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +"descricao TEXT, "
+            +"id_bloco INTEGER NOT NULL, "
+            +"FOREIGN KEY(id_bloco) REFERENCES blocos(id)"
+            +")";
+
+    String sqlCreateTabelaServicos = "CREATE TABLE servicos("
+            +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +"descricao TEXT, "
+            +"latitude TEXT, "
+            +"longitude TEXT, "
+            +"id_campus INTEGER NOT NULL, "
+            +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
+            +")";
+
+
     public DbHelper(Context context) {
         super(context, NOME_BASE, null, VERSAO_BASE);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        String sqlCreateTabelaCampi = "CREATE TABLE campi("
-                +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT "
-                +")";
-
-        String sqlCreateTabelaBlocos = "CREATE TABLE blocos("
-                +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT,"
-                +"latitude DOUBLE,"
-                +"longitude DOUBLE, "
-                +"id_campus INTEGER NOT NULL, "
-                +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
-                +")";
-
-        String sqlCreateTabelaSalas = "CREATE TABLE salas("
-                +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT, "
-                +"id_bloco INTEGER NOT NULL, "
-                +"FOREIGN KEY(id_bloco) REFERENCES blocos(id)"
-                +")";
-
-        String sqlCreateTabelaServicos = "CREATE TABLE servicos("
-                +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +"descricao TEXT, "
-                +"latitude TEXT, "
-                +"longitude TEXT, "
-                +"id_campus INTEGER NOT NULL, "
-                +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
-                +")";
 
         db.execSQL(sqlCreateTabelaCampi);
         db.execSQL(sqlCreateTabelaBlocos);
@@ -70,8 +71,6 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        Log.d("banco", "UPGRADE banco versao anterior: " + VERSAO_BASE);
-
         //drop tables
         db.execSQL("DROP TABLE campi");
         db.execSQL("DROP TABLE blocos");
@@ -80,6 +79,21 @@ public class DbHelper extends SQLiteOpenHelper {
         //cria novamente
         onCreate(db);
 
+
+    }
+
+    public void atualizar(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("DROP TABLE campi");
+        db.execSQL("DROP TABLE blocos");
+        db.execSQL("DROP TABLE salas");
+        db.execSQL("DROP TABLE servicos");
+
+        db.execSQL(sqlCreateTabelaCampi);
+        db.execSQL(sqlCreateTabelaBlocos);
+        db.execSQL(sqlCreateTabelaSalas);
+        db.execSQL(sqlCreateTabelaServicos);
 
     }
 
@@ -286,7 +300,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         Cursor c = db.rawQuery(sqlSelect, null);
         if (c.moveToFirst()){
-            do{
+            do {
                 Bloco bloco = new Bloco();
                 bloco.setId(c.getInt(c.getColumnIndex("idBloco")));
                 bloco.setDescricao(c.getString(c.getColumnIndex("descBloco")));
@@ -358,7 +372,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         "cam.descricao AS descCampus, cam.id AS idCampus " +
                         "FROM servicos ser " +
                         "INNER JOIN campi cam ON (ser.id_campus = cam.id) "+
-                        "WHERE ser.descricao LIKE '%"+filtro+"%' " +
+                        "WHERE ser.descricao LIKE '%" + filtro + "%' " +
                         "AND cam.id = "+idCampus+" "+
                         "ORDER BY descSvc";
 

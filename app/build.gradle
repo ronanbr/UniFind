@@ -33,13 +33,17 @@ android {
     }
     productFlavors {
     }
+
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     releaseCompile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
+    compile files('libs/gson-2.6.2.jar')
+    compile files('libs/retrofit-1.7.1.jar')
 }

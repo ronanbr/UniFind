@@ -1,8 +1,13 @@
 package br.unisul.unifind;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,19 +18,24 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import br.unisul.unifind.adapters.AdapterListView;
+import br.unisul.unifind.json.AtualizarAsyncTask;
+import br.unisul.unifind.json.DownloadJsonAsyncTaskCampus;
 import br.unisul.unifind.objetos.ItemListView;
 import br.unisul.unifind.objetos.ItemMenu;
+import br.unisul.unifind.viewsDB.DbHelper;
 
 public class Main extends AppCompatActivity {
 
     private ListView listView;
     private AdapterListView adapterListView;
     private ArrayList<ItemListView> itens;
+    private  DbHelper dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbh = new DbHelper(this);
 
         this.configurarListaDeOpcoes();
 
@@ -98,6 +108,13 @@ public class Main extends AppCompatActivity {
             case R.id.menuAdmin:
                 Intent intent = new Intent(this, LoginAdmin.class);
                 startActivity(intent);
+                return true;
+            case R.id.atualizar:
+                try {
+                    new AtualizarAsyncTask(this).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/versao");
+                }catch (Exception e){
+                    Log.e("Erro", "Falha ao acessar Web service", e);
+                }
                 return true;
         }
 
