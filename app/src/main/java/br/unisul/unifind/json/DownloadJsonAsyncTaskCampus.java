@@ -42,7 +42,7 @@ public class DownloadJsonAsyncTaskCampus extends AsyncTask<String, Void, List<Ca
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Campi.");
+        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Campi...");
     }
 
 

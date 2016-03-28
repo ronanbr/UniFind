@@ -44,7 +44,7 @@ public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
     //Exibe pop-up indicando que está sendo feito o download do JSON
     @Override
     protected void onPreExecute() {
-        dialog = ProgressDialog.show(context, "Aguarde", "Fazendo atualização dos dados.");
+        dialog = ProgressDialog.show(context, "Aguarde", "Conectando ao Servidor");
         super.onPreExecute();
     }
 
@@ -87,10 +87,11 @@ public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
 
             dbh.atualizar();
 
-            dialog.dismiss();
+
 
             new DownloadJsonAsyncTaskCampus(context).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/campus/listarTodos");
-
+            dialog.dismiss();
+            Toast.makeText(context, "teste", Toast.LENGTH_SHORT).show();
 
 //        }else{
 //                dialog.dismiss();

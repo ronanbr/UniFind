@@ -1,9 +1,5 @@
 package br.unisul.unifind;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,15 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
 
 import br.unisul.unifind.adapters.AdapterListView;
+import br.unisul.unifind.avaliacao.AppRater;
 import br.unisul.unifind.json.AtualizarAsyncTask;
-import br.unisul.unifind.json.DownloadJsonAsyncTaskCampus;
 import br.unisul.unifind.objetos.ItemListView;
-import br.unisul.unifind.objetos.ItemMenu;
 import br.unisul.unifind.viewsDB.DbHelper;
 
 public class Main extends AppCompatActivity {
@@ -38,6 +32,9 @@ public class Main extends AppCompatActivity {
         dbh = new DbHelper(this);
 
         this.configurarListaDeOpcoes();
+
+        AppRater.app_launched(this);
+
 
     }
 
@@ -105,10 +102,10 @@ public class Main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menuAdmin:
-                Intent intent = new Intent(this, LoginAdmin.class);
-                startActivity(intent);
-                return true;
+//            case R.id.menuAdmin:
+//                Intent intent = new Intent(this, LoginAdmin.class);
+//                startActivity(intent);
+//                return true;
             case R.id.atualizar:
                 try {
                     new AtualizarAsyncTask(this).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/versao");

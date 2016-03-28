@@ -44,7 +44,7 @@ public class DownloadJsonAsyncTaskServico extends AsyncTask<String, Void, List<S
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Serviço.");
+        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Serviços...");
     }
 
 

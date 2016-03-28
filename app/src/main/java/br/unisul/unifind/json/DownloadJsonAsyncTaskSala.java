@@ -44,7 +44,7 @@ public class DownloadJsonAsyncTaskSala extends AsyncTask<String, Void, List<Sala
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Salas.");
+        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Salas...");
     }
 
 

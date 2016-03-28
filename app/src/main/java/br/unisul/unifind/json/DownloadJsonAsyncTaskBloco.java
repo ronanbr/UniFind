@@ -51,7 +51,7 @@ public class DownloadJsonAsyncTaskBloco extends AsyncTask<String, Void, List<Blo
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Blocos.");
+        dialog = ProgressDialog.show(context, "Aguarde", "Atualizando Blocos...");
     }
 
 

@@ -31,4 +31,11 @@
     </string>
 
 
+    <!-- Strings related to AppRater-->
+
+    <string name="maistarde">Mais tarde</string>
+    <string name="nao">Não, Obrigado</string>
+    <string name="avaliar">Avaliar</string>
+
+
 </resources>
