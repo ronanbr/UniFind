@@ -35,6 +35,8 @@ public class Main extends AppCompatActivity {
 
         AppRater.app_launched(this);
 
+//atualizar DB
+        new AtualizarAsyncTask(this).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/versao");
 
     }
 
@@ -90,33 +92,29 @@ public class Main extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.main_menu, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
 //            case R.id.menuAdmin:
 //                Intent intent = new Intent(this, LoginAdmin.class);
 //                startActivity(intent);
 //                return true;
-            case R.id.atualizar:
-                try {
-                    new AtualizarAsyncTask(this).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/versao");
-                }catch (Exception e){
-                    Log.e("Erro", "Falha ao acessar Web service", e);
-                }
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//            case R.id.atualizar:
+//                new AtualizarAsyncTask(this).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/versao");
+//                return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onBackPressed() { android.os.Process.killProcess(android.os.Process.myPid()); }

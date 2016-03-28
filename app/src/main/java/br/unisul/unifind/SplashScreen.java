@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import br.unisul.unifind.json.AtualizarAsyncTask;
 import br.unisul.unifind.json.DownloadJsonAsyncTaskCampus;
 import br.unisul.unifind.viewsDB.DbHelper;
 
@@ -14,12 +15,15 @@ import br.unisul.unifind.viewsDB.DbHelper;
  */
 public class SplashScreen extends Activity {
     // Timer da splash screen
-         private static int SPLASH_TIME_OUT = 3000;
+         private static int SPLASH_TIME_OUT = 2500;
+
 
          @Override
          protected void onCreate(Bundle savedInstanceState) {
-               super.onCreate(savedInstanceState);
-               setContentView(R.layout.activity_splash_screen);
+
+             super.onCreate(savedInstanceState);
+             setContentView(R.layout.activity_splash_screen);
+
 
              new Handler().postDelayed(new Runnable() {
                  /*

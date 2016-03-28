@@ -78,7 +78,7 @@ public class DownloadJsonAsyncTaskCampus extends AsyncTask<String, Void, List<Ca
         if (result.size()>0) {
             for (Campus camp : result) {
                 dbh.insertCampus(camp);
-                Log.d("CAMPUS INSERIDO: ", camp.getDescricao());
+                //Log.d("CAMPUS INSERIDO: ", camp.getDescricao());
             }
         }
 
@@ -107,7 +107,7 @@ public class DownloadJsonAsyncTaskCampus extends AsyncTask<String, Void, List<Ca
                 objetoCampus.setDescricao(campus.getString("descricao"));
 
                 campi.add(objetoCampus);
-                Log.i("CAMPUS ENCONTRADO: ", objetoCampus.toString());
+                //Log.i("CAMPUS ENCONTRADO: ", objetoCampus.toString());
             }
 
         } catch (JSONException e) {

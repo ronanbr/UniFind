@@ -80,7 +80,7 @@ public class DownloadJsonAsyncTaskSala extends AsyncTask<String, Void, List<Sala
         if (result.size() > 0) {
             for (Sala sal : result) {
                 dbh.insertSala(sal);
-                Log.d("SALA INSERIDA: ", sal.getDescricao());
+                //Log.d("SALA INSERIDA: ", sal.getDescricao());
             }
 
         }
@@ -105,7 +105,7 @@ public class DownloadJsonAsyncTaskSala extends AsyncTask<String, Void, List<Sala
 
             for (int i = 0; i < salasJson.length(); i++) {
                 sala = new JSONObject(salasJson.getString(i));
-                //Log.i("BLOCO ENCONTRADO: ", "nome=" + sala.getString("descricao"));
+                //Log.i("SALA ENCONTRADA: ", "nome=" + sala.getString("descricao"));
 
                 Sala objetoSala = new Sala();
                 objetoSala.setDescricao(sala.getString("descricao"));
@@ -130,7 +130,7 @@ public class DownloadJsonAsyncTaskSala extends AsyncTask<String, Void, List<Sala
             }
 
         } catch (JSONException e) {
-            Log.e("Erro", "Erro no parsing do JSON", e);
+            Log.e("Erro", "Erro no parsing do JSON da Sala", e);
         }
         return  salas;
     }

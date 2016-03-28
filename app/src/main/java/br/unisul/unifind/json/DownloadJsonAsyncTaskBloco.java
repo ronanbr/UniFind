@@ -86,7 +86,7 @@ public class DownloadJsonAsyncTaskBloco extends AsyncTask<String, Void, List<Blo
         if (result.size() > 0) {
             for (Bloco blo : result) {
                 dbh.insertBloco(blo);
-                Log.d("BLOCO INSERIDO: ", blo.getDescricao());
+                //Log.d("BLOCO INSERIDO: ", blo.getDescricao());
             }
 
         }

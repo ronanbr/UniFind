@@ -19,12 +19,16 @@ import br.unisul.unifind.objetos.Servico;
  * Created by Ronan Cardoso on 28/10/2015.
  */
 public class DbHelper extends SQLiteOpenHelper {
-    private static final String NOME_BASE = "UniFindData";
-    private static final int VERSAO_BASE = 50;
+    private static final String NOME_BASE = "UniFindDataBase";
+    private static final int VERSAO_BASE = 3;
 
     String sqlCreateTabelaCampi = "CREATE TABLE campi("
             +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
             +"descricao TEXT "
+            +")";
+
+    String sqlCreateTabelaVersao = "CREATE TABLE tb_versao("
+            +"versao INTEGER "
             +")";
 
     String sqlCreateTabelaBlocos = "CREATE TABLE blocos("
@@ -52,7 +56,6 @@ public class DbHelper extends SQLiteOpenHelper {
             +"FOREIGN KEY(id_campus) REFERENCES campi(id)"
             +")";
 
-
     public DbHelper(Context context) {
         super(context, NOME_BASE, null, VERSAO_BASE);
     }
@@ -64,6 +67,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateTabelaBlocos);
         db.execSQL(sqlCreateTabelaSalas);
         db.execSQL(sqlCreateTabelaServicos);
+        db.execSQL(sqlCreateTabelaVersao);
+        insertVersao(db);
 
         populaBase(db);
     }
@@ -72,29 +77,44 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //drop tables
-        db.execSQL("DROP TABLE campi");
-        db.execSQL("DROP TABLE blocos");
-        db.execSQL("DROP TABLE salas");
-        db.execSQL("DROP TABLE servicos");
+        db.execSQL("DROP TABLE IF EXISTS campi");
+        db.execSQL("DROP TABLE IF EXISTS blocos");
+        db.execSQL("DROP TABLE IF EXISTS salas");
+        db.execSQL("DROP TABLE IF EXISTS servicos");
+        db.execSQL("DROP TABLE IF EXISTS tb_versao");
         //cria novamente
         onCreate(db);
 
 
     }
 
-    public void atualizar(){
+    public void atualizar(int versao){
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("DROP TABLE campi");
-        db.execSQL("DROP TABLE blocos");
-        db.execSQL("DROP TABLE salas");
-        db.execSQL("DROP TABLE servicos");
+        db.execSQL("DROP TABLE IF EXISTS campi");
+        db.execSQL("DROP TABLE IF EXISTS blocos");
+        db.execSQL("DROP TABLE IF EXISTS salas");
+        db.execSQL("DROP TABLE IF EXISTS servicos");
+        db.execSQL("DROP TABLE IF EXISTS tb_versao");
 
         db.execSQL(sqlCreateTabelaCampi);
         db.execSQL(sqlCreateTabelaBlocos);
         db.execSQL(sqlCreateTabelaSalas);
         db.execSQL(sqlCreateTabelaServicos);
+        db.execSQL(sqlCreateTabelaVersao);
 
+        insertVersao(db);
+
+        this.updateVersao(db, versao);
+
+    }
+
+    public void insertVersao(SQLiteDatabase db){
+        ContentValues cv = new ContentValues();
+
+        cv.put("versao", 1);
+
+        db.insert("tb_versao", null, cv);
     }
 
     public void insertCampus(Campus campus){
@@ -396,6 +416,27 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return servicos;
     }
+
+    public void updateVersao(SQLiteDatabase db, int versao){
+        String sqlUpdateVersao = "UPDATE tb_versao SET versao = "+versao;
+        db.execSQL(sqlUpdateVersao);
+    }
+
+
+    public Integer selectVersao(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sqlSelect = "SELECT versao FROM tb_versao";
+
+        Cursor c = db.rawQuery(sqlSelect, null);
+
+        c.moveToFirst();
+        int result = c.getInt(0);
+
+        Log.d("VERSAO BD",""+result);
+        return result;
+    }
+
 
     public void populaBase(SQLiteDatabase db){
         ContentValues cv = new ContentValues();

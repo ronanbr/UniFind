@@ -4,7 +4,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unisul.unifind.R;
 import br.unisul.unifind.objetos.Campus;
 import br.unisul.unifind.objetos.VersaoBD;
 import br.unisul.unifind.viewsDB.DbHelper;
@@ -33,7 +38,7 @@ import br.unisul.unifind.viewsDB.DbHelper;
  * Created by Ronan Cardoso on 26/03/2016.
  */
 public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
-    ProgressDialog dialog;
+    //ProgressDialog dialog;
     Context context;
     DbHelper dbh;
 
@@ -44,7 +49,7 @@ public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
     //Exibe pop-up indicando que está sendo feito o download do JSON
     @Override
     protected void onPreExecute() {
-        dialog = ProgressDialog.show(context, "Aguarde", "Conectando ao Servidor");
+        //dialog = ProgressDialog.show(context, "Aguarde", "Conectando ao Servidor");
         super.onPreExecute();
     }
 
@@ -63,10 +68,16 @@ public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
                 String json = getStringFromInputStream(instream);
                 instream.close();
 
-                JSONObject versaoJson = new JSONObject(json);
+                try{
+                    JSONObject versaoJson = new JSONObject(json);
 
-                if(versaoJson!=null){
-                    return versaoJson.getInt("versaoDB");
+                    if(versaoJson != null){
+
+                        return versaoJson.getInt("versaoDB");
+                    }
+                }catch (Exception e){
+                    Log.d("FALHA NA CONEXÃO", e.getMessage().toString());
+                    //dialog.dismiss();
                 }
 
             }
@@ -79,40 +90,42 @@ public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
 
     //Depois de executada a chamada do serviço
     @Override
-    protected void onPostExecute(Integer result) {
+    protected void onPostExecute(final Integer result) {
         super.onPostExecute(result);
         this.dbh = new DbHelper(context);
+        int versaoBancoAtual = dbh.selectVersao();
 
         if(result!= null){
 
-            dbh.atualizar();
+            if((versaoBancoAtual < result)){
+                new AlertDialog.Builder(context)
+                        .setTitle("Atualização Disponivel")
+                        .setMessage("Novos dados disponíveis, gostaria de atualizar?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.dismiss();
+
+                                //efetua a atualização
+                                dbh.atualizar(result);
+                                new DownloadJsonAsyncTaskCampus(context).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/campus/listarTodos");
 
 
+                            }
+                        })
+                        .setNeutralButton(R.string.maistarde, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
 
-            new DownloadJsonAsyncTaskCampus(context).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/campus/listarTodos");
-            dialog.dismiss();
-            Toast.makeText(context, "teste", Toast.LENGTH_SHORT).show();
-
-//        }else{
-//                dialog.dismiss();
-//            new AlertDialog.Builder(context)
-//                    .setTitle("Erro")
-//                    .setMessage("Problema na comunicação com o servidor, tente novamente mais tarde.")
-//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            android.os.Process.killProcess(android.os.Process.myPid());
-//                        }
-//                    })
-//                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                    .show();
-//
-//                Toast.makeText(context, "Banco atualizado, versao: "+result, Toast.LENGTH_SHORT).show();
-//            }
-
-
+        }else{
+             Toast.makeText(context, "Problema na comunicação com o servidor", Toast.LENGTH_LONG).show();
         }
-
-
+        //dialog.dismiss();
     }
 
     // convert InputStream to String

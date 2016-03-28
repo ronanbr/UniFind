@@ -2,6 +2,7 @@ package br.unisul.unifind.json;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -80,11 +81,10 @@ public class DownloadJsonAsyncTaskServico extends AsyncTask<String, Void, List<S
         if (result.size() > 0) {
             for (Servico ser : result) {
                 dbh.insertServico(ser);
-                Log.d("SERVICO INSERIDO: ", ser.getDescricao());
+                //Log.d("SERVICO INSERIDO: ", ser.getDescricao());
             }
 
             dialog.dismiss();
-
             Toast.makeText(context, "Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show();
 
         }
@@ -120,7 +120,7 @@ public class DownloadJsonAsyncTaskServico extends AsyncTask<String, Void, List<S
                 objetoServico.setCampus(objetoCampus);
                 servicos.add(objetoServico);
 
-                Log.i("SERVICO ENCONTRADO: ", objetoServico.toString());
+                //Log.i("SERVICO ENCONTRADO: ", objetoServico.toString());
             }
 
         } catch (JSONException e) {
