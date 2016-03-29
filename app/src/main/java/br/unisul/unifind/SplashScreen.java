@@ -14,8 +14,8 @@ import br.unisul.unifind.viewsDB.DbHelper;
  * status bar and navigation/system bar) with user interaction.
  */
 public class SplashScreen extends Activity {
-    // Timer da splash screen
-         private static int SPLASH_TIME_OUT = 2500;
+        // Timer da splash screen
+         private static int SPLASH_TIME_OUT = 2000;
 
 
          @Override

@@ -1,6 +1,10 @@
 package br.unisul.unifind;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 import br.unisul.unifind.adapters.AdapterListView;
 import br.unisul.unifind.avaliacao.AppRater;
 import br.unisul.unifind.json.AtualizarAsyncTask;
+import br.unisul.unifind.json.DownloadJsonAsyncTaskCampus;
 import br.unisul.unifind.objetos.ItemListView;
 import br.unisul.unifind.viewsDB.DbHelper;
 
@@ -35,7 +40,9 @@ public class Main extends AppCompatActivity {
 
         AppRater.app_launched(this);
 
-//atualizar DB
+        this.verificaGPSativo();
+
+        //atualizar DB
         new AtualizarAsyncTask(this).execute("http://ronanbr.ddns-intelbras.com.br:36666/unifind/versao");
 
     }
@@ -115,6 +122,39 @@ public class Main extends AppCompatActivity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+
+    private void verificaGPSativo(){
+        LocationManager manager = (LocationManager) getSystemService( this.LOCATION_SERVICE );
+        boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
+        if(!isOn){
+
+            new AlertDialog.Builder(this)
+                    .setTitle("GPS inativo!")
+                    .setMessage("Para melhor precisão, recomenda-se ativar o GPS")
+                    .setPositiveButton("Ativar agora", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            String provider = Settings.Secure.getString(getContentResolver(),
+                                    Settings.Secure.ALLOWED_GEOLOCATION_ORIGINS);
+                            //Se vier null ou length == 0   é por que o GPS esta desabilitado.
+                            //Para abrir a tela do menu pode fazer assim:
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivityForResult(intent, 1);
+                            dialog.dismiss();
+
+                        }
+                    })
+                    .setNeutralButton(R.string.nao, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+        }
+    }
 
     @Override
     public void onBackPressed() { android.os.Process.killProcess(android.os.Process.myPid()); }
