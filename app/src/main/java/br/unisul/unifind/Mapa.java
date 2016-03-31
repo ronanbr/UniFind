@@ -143,7 +143,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
 
         new AlertDialog.Builder(this)
                 .setTitle(" Dica!")
-                .setMessage("Clique no marcador para exibir as opções de rota no canto inferior direito da tela!")
+                .setMessage("Toque no marcador para exibir as opções de rota no canto inferior direito da tela!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (editor != null) {
