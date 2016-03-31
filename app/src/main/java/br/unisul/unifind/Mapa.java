@@ -1,11 +1,15 @@
 package br.unisul.unifind;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -45,6 +49,9 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        showTipDialog();
+
     }
 
     @Override
@@ -126,6 +133,36 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         }
 
     }
+
+    private void showTipDialog() {
+
+        SharedPreferences prefs = this.getSharedPreferences("unifind", 0);
+        if (prefs.getBoolean("dontshowtipsagain", false)) { return ; }
+
+        final SharedPreferences.Editor editor = prefs.edit();
+
+        new AlertDialog.Builder(this)
+                .setTitle(" Dica!")
+                .setMessage("Clique no marcador para exibir as opções de rota no canto inferior direito da tela!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (editor != null) {
+                            editor.putBoolean("dontshowtipsagain", true);
+                            editor.commit();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNeutralButton("Depois", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+
 
     @Override
     public void onBackPressed() { finish(); }
