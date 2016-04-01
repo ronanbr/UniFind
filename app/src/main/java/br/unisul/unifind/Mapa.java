@@ -153,7 +153,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                         dialog.dismiss();
                     }
                 })
-                .setNeutralButton("Depois", new DialogInterface.OnClickListener(){
+                .setNeutralButton("Lembrar Depois", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
