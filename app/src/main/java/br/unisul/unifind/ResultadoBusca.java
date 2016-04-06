@@ -1,6 +1,9 @@
 package br.unisul.unifind;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,36 +44,43 @@ public class ResultadoBusca extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String filtro = bundle.getString("filtro");
 
-        //TODO: Elaborar ifs para tipo de resultado
+        //ifs para tipo de resultado
         if(bundle.getBoolean("bloco")){
             List<Bloco> blocos = dbHelper.selectBlocos(filtro, bundle.getInt("campus"));
 
-            listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,blocos));
+            if(blocos.size()<1){
+                showNothingDialog();
+            }else{
+                listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,blocos));
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
-                    Bloco bloco = (Bloco) listView.getItemAtPosition(position);
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                    {
+                        Bloco bloco = (Bloco) listView.getItemAtPosition(position);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("descricaoMapa", bloco.getDescricao());
-                    bundle.putDouble("latitudeMapa", bloco.getLatitude());
-                    bundle.putDouble("longitudeMapa", bloco.getLongitude());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("descricaoMapa", bloco.getDescricao());
+                        bundle.putDouble("latitudeMapa", bloco.getLatitude());
+                        bundle.putDouble("longitudeMapa", bloco.getLongitude());
 
-                    Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
-                    mapa.putExtras(bundle);
-                    startActivity(mapa);
-                }
-            });
+                        Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
+                        mapa.putExtras(bundle);
+                        startActivity(mapa);
+                    }
+                });
+            }
 
         }else if(bundle.getBoolean("sala")){
             List<Sala> salas = dbHelper.selectSalas(bundle.getString("filtro"), bundle.getInt("idBloco"));
 
-            listView.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1 ,salas));
+            if(salas.size()<1){
+                showNothingDialog();
+            }else{
+                listView.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1 ,salas));
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
@@ -88,32 +98,56 @@ public class ResultadoBusca extends AppCompatActivity {
                         startActivity(mapa);
                     }
                 });
+            }
+
+
 
         }else if(bundle.getBoolean("servico")){
             List<Servico> servicos = dbHelper.selectServicos(filtro, bundle.getInt("idCampus"));
 
-            listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,servicos));
+            if(servicos.size()<1){
+                showNothingDialog();
+            }else{
+                listView.setAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1 ,servicos));
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
-                    Servico svc = (Servico) listView.getItemAtPosition(position);
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                    {
+                        Servico svc = (Servico) listView.getItemAtPosition(position);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("descricaoMapa", svc.getDescricao());
-                    bundle.putDouble("latitudeMapa", svc.getLatitude());
-                    bundle.putDouble("longitudeMapa", svc.getLongitude());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("descricaoMapa", svc.getDescricao());
+                        bundle.putDouble("latitudeMapa", svc.getLatitude());
+                        bundle.putDouble("longitudeMapa", svc.getLongitude());
 
-                    Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
-                    mapa.putExtras(bundle);
-                    startActivity(mapa);
-                }
-            });
+                        Intent mapa = new Intent(ResultadoBusca.this, Mapa.class);
+                        mapa.putExtras(bundle);
+                        startActivity(mapa);
+                    }
+                });
+
+            }
+
 
         }
 
+
+    }
+
+    private void showNothingDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(" Ops!")
+                .setMessage("Nenhum local encontrado!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
     }
 }

@@ -58,7 +58,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.setMyLocationEnabled(true);
         mMap.setIndoorEnabled(true);
 
@@ -85,16 +85,12 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
 
 
     private void setUpMap() {
+        //Define o perímetro do campus
+        desenhaPerimetroCampus();
+
         //caso tiver informação de local no bundle, mostrar esse local no mapa;
         if(this.bundle.containsKey("descricaoMapa")){
-            //Define o perímetro do campus
-            LatLng infEsq = new LatLng(-28.482994, -49.019523);
-            LatLng infDir = new LatLng(-28.482652, -49.017513);
-            LatLng supDir = new LatLng(-28.474512, -49.026091);
-            LatLng supEsq = new LatLng(-28.475237, -49.027319);
 
-            Polygon polygon = mMap.addPolygon(new PolygonOptions()
-                    .add(infEsq, infDir, supDir, supEsq).strokeColor(R.color.primary));
 
             //define um marker com o local
             String descricao = bundle.getString("descricaoMapa");
@@ -109,15 +105,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             bundle.remove("longitudeMapa");
 
         }else{
-            //Define o perímetro do campus
-            LatLng infEsq = new LatLng(-28.482994, -49.019523);
-            LatLng infDir = new LatLng(-28.482652, -49.017513);
-            LatLng supDir = new LatLng(-28.474512, -49.026091);
-            LatLng supEsq = new LatLng(-28.475237, -49.027319);
-
-            Polygon polygon = mMap.addPolygon(new PolygonOptions()
-                    .add(infEsq, infDir, supDir, supEsq).strokeColor(R.color.primary));
-
             //adiciona um marker para cada bloco do banco de dados;
             List<Bloco> blocos = dbHelper.selectTodosBlocos();
             for (Bloco bloco : blocos) {
@@ -163,6 +150,18 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
+    public void desenhaPerimetroCampus(){
+        //Define o perímetro do campus
+        LatLng infEsq = new LatLng(-28.482994, -49.019523);
+        LatLng infDir = new LatLng(-28.482652, -49.017513);
+        LatLng midDir = new LatLng(-28.479735, -49.020364);
+        LatLng midEsq = new LatLng(-28.479960, -49.020703);
+        LatLng supDir = new LatLng(-28.474512, -49.026091);
+        LatLng supEsq = new LatLng(-28.475237, -49.027319);
+
+        Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                .add(infEsq, infDir, midDir, midEsq, supDir, supEsq).strokeColor(R.color.primary));
+    }
 
     @Override
     public void onBackPressed() { finish(); }

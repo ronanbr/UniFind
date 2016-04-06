@@ -123,7 +123,7 @@ public class AtualizarAsyncTask extends AsyncTask<String, Void, Integer> {
             }
 
         }else{
-             Toast.makeText(context, "Problema na comunicação com o servidor", Toast.LENGTH_LONG).show();
+             Toast.makeText(context, "Não foi possível conectar ao servidor", Toast.LENGTH_SHORT).show();
         }
         //dialog.dismiss();
     }

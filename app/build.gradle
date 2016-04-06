@@ -15,8 +15,8 @@ android {
         applicationId "br.unisul.unifind"
         minSdkVersion 11
         targetSdkVersion 22
-        versionCode 12
-        versionName '12'
+        versionCode 13
+        versionName '13'
         signingConfig signingConfigs.config
     }
     buildTypes {
