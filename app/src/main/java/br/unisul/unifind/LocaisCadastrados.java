@@ -18,7 +18,6 @@ import br.unisul.unifind.objetos.Sala;
 import br.unisul.unifind.objetos.Servico;
 import br.unisul.unifind.viewsDB.DbHelper;
 
-//TODO transformar em generica.
 public class LocaisCadastrados extends AppCompatActivity{
 
     private ListView listView;
@@ -36,9 +35,9 @@ public class LocaisCadastrados extends AppCompatActivity{
 
         DbHelper dbHelper = new DbHelper(this);
 
-        List<Bloco> blocos = dbHelper.selectTodosBlocos();
-        List<Sala> salas = dbHelper.selectTodasSalas();
-        List<Servico> servicos = dbHelper.selectTodosServicos();
+        ArrayList <Bloco> blocos = dbHelper.selectTodosBlocos();
+        ArrayList<Sala> salas = dbHelper.selectTodasSalas();
+        ArrayList<Servico> servicos = dbHelper.selectTodosServicos();
 
         //converte bloco em local
         List<Local> locais = new ArrayList<>();
